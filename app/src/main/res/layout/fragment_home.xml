@@ -65,18 +65,14 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ivDailyInspiration" />
 
-                    <Button
-                        android:id="@+id/textButton"
-                        style="@style/Widget.Material3.Button.TextButton.Icon"
-                        android:layout_width="0dp"
+                    <CheckBox
+                        android:id="@+id/icon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="150dp"
-                        android:layout_marginEnd="24dp"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
-                        app:icon="@drawable/star_fill0_wght400_grad0_opsz48"
+                        android:layout_marginStart="125dp"
+                        android:button="@drawable/sl_favourite_24dp"
+                        app:buttonTint="@color/gold"
                         app:layout_constraintBottom_toBottomOf="@+id/tvDIName"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tvDIName"
                         app:layout_constraintTop_toTopOf="@+id/tvDIName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
