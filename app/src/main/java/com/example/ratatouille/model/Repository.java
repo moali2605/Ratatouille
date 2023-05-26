@@ -20,6 +20,12 @@ public class Repository implements RepositoryInterface {
         this.remoteSource=remoteSource;
         this.localSource=localSource;
     }
+    public static Repository getInstance(RemoteSource remoteSource,LocalSource localSource,Context context){
+        if (repo==null){
+            repo=new Repository(remoteSource,localSource,context);
+        }
+        return repo;
+    }
 
     @Override
     public void getMealByIngredient(NetworkDelegate networkDelegate, String search) {

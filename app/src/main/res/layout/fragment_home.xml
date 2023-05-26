@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeFragment">
+    tools:context=".home.view.HomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvDailyInspiration"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_gravity="top|center"
@@ -67,7 +68,7 @@
                         android:textStyle="bold"/>
 
                     <CheckBox
-                        android:id="@+id/icon"
+                        android:id="@+id/cbDI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="28dp"
@@ -75,12 +76,12 @@
                         android:scaleX="0.75"
                         android:scaleY="0.75"
                         app:buttonTint="@color/gold"
-                        app:layout_constraintBottom_toBottomOf="@+id/button2"
+                        app:layout_constraintBottom_toBottomOf="@+id/btnDI"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/button2" />
+                        app:layout_constraintTop_toTopOf="@+id/btnDI" />
 
                     <Button
-                        android:id="@+id/button2"
+                        android:id="@+id/btnDI"
                         style="@style/Widget.Material3.Button.ElevatedButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
