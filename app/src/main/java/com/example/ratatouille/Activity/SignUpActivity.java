@@ -1,4 +1,4 @@
-package com.example.ratatouille;
+package com.example.ratatouille.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ratatouille.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText tfEmail, tfName, tfPassword, tfConfPassword;
     Button btnSignup;
@@ -41,7 +42,7 @@ public class SignUp extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(SignUp.this, "Authentication Done.",
+                                Toast.makeText(SignUpActivity.this, "Authentication Done.",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
                                 startActivity(intent);
@@ -50,7 +51,7 @@ public class SignUp extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(SignUp.this, "Authentication failed.",
+                                Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
 
                                 //updateUI(null);

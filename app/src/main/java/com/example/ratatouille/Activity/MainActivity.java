@@ -1,10 +1,12 @@
-package com.example.ratatouille;
+package com.example.ratatouille.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.ratatouille.R;
 
 public class MainActivity extends AppCompatActivity {
 

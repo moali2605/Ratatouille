@@ -13,21 +13,21 @@
         android:theme="@style/Theme.Ratatouille"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".Activity.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".SignActivity"
+            android:name=".Activity.SignActivity"
             android:exported="false"
             android:label="@string/title_activity_sign"
             android:theme="@style/Theme.Ratatouille" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,27 +6,27 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.ratatouille.HomeFragment"
+        android:name="com.example.ratatouille.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/dailyMealFragment"
-        android:name="com.example.ratatouille.DailyMealFragment"
+        android:name="com.example.ratatouille.DailyMeal.DailyMealFragment"
         android:label="fragment_daily_meal"
         tools:layout="@layout/fragment_daily_meal" />
     <fragment
         android:id="@+id/favouriteMealFragment"
-        android:name="com.example.ratatouille.FavouriteMealFragment"
+        android:name="com.example.ratatouille.FavouriteMeal.FavouriteMealFragment"
         android:label="fragment_favourite_meal"
         tools:layout="@layout/fragment_favourite_meal" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.ratatouille.SearchFragment"
+        android:name="com.example.ratatouille.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.ratatouille.ProfileFragment"
+        android:name="com.example.ratatouille.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
