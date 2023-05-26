@@ -30,7 +30,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="400dp"
                 android:layout_gravity="top|center"
                 android:layout_margin="16dp"
                 android:checkable="true"
@@ -58,23 +58,37 @@
                         android:id="@+id/tvDIName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="44dp"
-                        tools:text="Pizza sea Food"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="32dp"
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivDailyInspiration" />
+                        app:layout_constraintTop_toBottomOf="@+id/ivDailyInspiration"
+                        tools:text="Pizza sea Food"
+                        android:textStyle="bold"/>
 
                     <CheckBox
                         android:id="@+id/icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="125dp"
+                        android:layout_marginEnd="28dp"
                         android:button="@drawable/sl_favourite_24dp"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
                         app:buttonTint="@color/gold"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvDIName"
-                        app:layout_constraintStart_toEndOf="@+id/tvDIName"
-                        app:layout_constraintTop_toTopOf="@+id/tvDIName" />
+                        app:layout_constraintBottom_toBottomOf="@+id/button2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/button2" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        style="@style/Widget.Material3.Button.ElevatedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Add To Daily"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="@+id/tvDIName"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDIName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -90,7 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                tools:listitem="@layout/list_item"
+                android:layout_marginLeft="16dp"
+                tools:listitem="@layout/avater_list_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
             <TextView
                 android:id="@+id/textView8"
@@ -104,7 +119,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                tools:listitem="@layout/list_item"
+                android:layout_marginLeft="16dp"
+                tools:listitem="@layout/avater_list_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </LinearLayout>

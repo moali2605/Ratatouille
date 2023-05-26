@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:elevation="25dp"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_gravity="top|center"
@@ -15,7 +16,6 @@
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="50dp"
-        app:elevation="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
