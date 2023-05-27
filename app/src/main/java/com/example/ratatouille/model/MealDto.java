@@ -145,6 +145,9 @@ public class MealDto {
     }
 
     public String getStrCategory() {
+        if(strCategory==null){
+            strCategory="";
+        }
         return strCategory;
     }
 
@@ -153,6 +156,9 @@ public class MealDto {
     }
 
     public String getStrArea() {
+        if(strArea==null){
+            strArea="";
+        }
         return strArea;
     }
 
@@ -521,6 +527,9 @@ public class MealDto {
     }
 
     public String getStrIngredient() {
+        if(strIngredient==null){
+            strIngredient="";
+        }
         return strIngredient;
     }
 

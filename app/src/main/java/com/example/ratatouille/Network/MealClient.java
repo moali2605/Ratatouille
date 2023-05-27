@@ -26,8 +26,6 @@ public class MealClient implements RemoteSource {
         }
         return client;
     }
-
-    Gson gson = new GsonBuilder().setLenient().create();
     Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();

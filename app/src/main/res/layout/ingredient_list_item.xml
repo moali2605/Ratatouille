@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_avatar"
+        android:id="@+id/ivItem"
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_avatar"
+        app:layout_constraintBottom_toBottomOf="@+id/ivItem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

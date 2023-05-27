@@ -16,7 +16,7 @@ public class ConcreteLocalSource implements LocalSource{
     private ConcreteLocalSource(Context context){
         AppDataBase db=AppDataBase.getInstance(context.getApplicationContext());
         mealDAO=db.productDAO();
-        storeMeal=mealDAO.getAllProduct();
+        storeMeal=mealDAO.getAllMeal();
     }
     public static ConcreteLocalSource getInstance(Context context){
         if(localSource==null){
@@ -40,6 +40,6 @@ public class ConcreteLocalSource implements LocalSource{
 
     @Override
     public LiveData<List<MealDto>> getMeal() {
-        return mealDAO.getAllProduct();
+        return mealDAO.getAllMeal();
     }
 }
