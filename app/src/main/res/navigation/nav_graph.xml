@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.ratatouille.home.view.HomeFragment"
+        android:name="home.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -59,14 +59,14 @@
     </fragment>
     <fragment
         android:id="@+id/showListOfMealFragment"
-        android:name="com.example.ratatouille.Ingredient.ShowListOfMealFragment"
+        android:name="com.example.ratatouille.Ingredient.view.ShowListOfMealFragment"
         android:label="fragment_show_list_of_meal"
         tools:layout="@layout/fragment_show_list_of_meal" >
         <action
             android:id="@+id/action_showListOfMealFragment_to_mealFragment"
             app:destination="@id/mealFragment" />
         <argument
-            android:name="typeOfMeal"
-            app:argType="com.example.ratatouille.model.MealDto" />
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>

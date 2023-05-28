@@ -18,4 +18,5 @@ public interface MealDAO {
     void insertMeal (MealDto meal);
     @Delete
     void deleteMeal (MealDto meal);
+    //@Query("INSERT INTO MEAL")
 }

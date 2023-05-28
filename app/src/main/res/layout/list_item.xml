@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:elevation="25dp"
+        android:id="@+id/cvItem"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_gravity="top|center"
@@ -14,6 +14,7 @@
         android:layout_marginBottom="16dp"
         android:checkable="true"
         android:clickable="true"
+        android:elevation="25dp"
         android:focusable="true"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,52 +27,40 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/ivFavMeal"
+                android:id="@+id/ivListByMeal"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:scaleType="centerCrop"
                 tools:src="@drawable/image" />
 
             <TextView
-                android:id="@+id/tvFavName"
+                android:id="@+id/tvListOfMealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="32dp"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivFavMeal"
-                tools:text="Pizza sea Food"
-                android:textStyle="bold"/>
-
-            <ImageButton
-                android:id="@+id/btnFavDI"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="120dp"
-                android:layout_marginEnd="28dp"
-                android:backgroundTint="#00FFFFFF"
-                android:scaleType="centerCrop"
-                android:src="@drawable/goldstar"
-                app:layout_constraintBottom_toBottomOf="@+id/btnAddToDaily"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnAddToDaily"
-                app:layout_constraintTop_toTopOf="@+id/btnAddToDaily" />
+                app:layout_constraintTop_toBottomOf="@+id/ivListByMeal"
+                tools:text="Pizza sea Food" />
 
             <Button
-                android:id="@+id/btnAddToDaily"
+                android:id="@+id/btnAddToFavItem"
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Add To Daily"
+                android:layout_marginEnd="32dp"
+                android:text="Add To Favourite"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/tvFavName"
-                app:layout_constraintTop_toBottomOf="@+id/tvFavName" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvListOfMealName"
+                app:layout_constraintTop_toBottomOf="@+id/tvListOfMealName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 

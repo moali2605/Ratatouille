@@ -29,7 +29,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/ivFavMeal"
+                android:id="@+id/ivListByMeal"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
@@ -39,20 +39,20 @@
                 tools:src="@drawable/image" />
 
             <TextView
-                android:id="@+id/tvFavName"
+                android:id="@+id/tvListOfMealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginLeft="16dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/ivFavMeal"
-                app:layout_constraintStart_toStartOf="@+id/ivFavMeal"
-                app:layout_constraintTop_toBottomOf="@+id/ivFavMeal"
+                app:layout_constraintEnd_toEndOf="@+id/ivListByMeal"
+                app:layout_constraintStart_toStartOf="@+id/ivListByMeal"
+                app:layout_constraintTop_toBottomOf="@+id/ivListByMeal"
                 tools:text="Pizza sea Food" />
 
             <Button
-                android:id="@+id/btnAddToDaily"
+                android:id="@+id/btnAddToFavItem"
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -62,8 +62,8 @@
                 android:text="Add To Daily"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/ivFavMeal"
-                app:layout_constraintTop_toBottomOf="@+id/tvFavName" />
+                app:layout_constraintStart_toStartOf="@+id/ivListByMeal"
+                app:layout_constraintTop_toBottomOf="@+id/tvListOfMealName" />
 
             <Button
                 android:id="@+id/btnDelete"
@@ -73,10 +73,10 @@
                 android:layout_marginEnd="16dp"
                 android:text="Delete"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnAddToDaily"
-                app:layout_constraintEnd_toEndOf="@+id/ivFavMeal"
-                app:layout_constraintStart_toEndOf="@+id/btnAddToDaily"
-                app:layout_constraintTop_toTopOf="@+id/btnAddToDaily"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAddToFavItem"
+                app:layout_constraintEnd_toEndOf="@+id/ivListByMeal"
+                app:layout_constraintStart_toEndOf="@+id/btnAddToFavItem"
+                app:layout_constraintTop_toTopOf="@+id/btnAddToFavItem"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

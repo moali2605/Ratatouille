@@ -1,24 +1,24 @@
-package com.example.ratatouille.home.view;
+package com.example.ratatouille.Ingredient.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
 import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.viewHolder> {
+public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAdapter.viewHolder> {
     List<MealDto> myList = new ArrayList<>();
     Context context;
 
@@ -27,24 +27,21 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.vi
         this.myList=myList;
         notifyDataSetChanged();
     }
-    public CategoriesAdapter (Context context){
+    public ShowListOfMealAdapter (Context context){
         this.context=context;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.avater_list_item, parent, false));
+        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        holder.tvItemName.setText(myList.get(position).getStrCategory());
-        Glide.with(context).load("https://www.themealdb.com/images/category/"+myList.get(position).getStrCategory()+".png")
-                .apply(new RequestOptions().override(200, 200))
-                .placeholder(R.drawable.profilphoto)
-                .error(R.drawable.profilphoto).into(holder.ivItem);
+        holder.tvListOfMealName.setText(myList.get(position).getStrMeal());
+
     }
 
     @Override
@@ -59,12 +56,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.vi
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
-         public TextView tvItemName;
-        public ImageView ivItem;
-        public viewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvItemName=itemView.findViewById(R.id.tvItemName);
-            ivItem=itemView.findViewById(R.id.ivIngredient);
+        ImageView ivListByMeal;
+        TextView tvListOfMealName;
+        Button btnAddToFavItem;
+
+        public viewHolder(@NonNull View v) {
+            super(v);
+            ivListByMeal=v.findViewById(R.id.ivListByMeal);
+            tvListOfMealName=v.findViewById(R.id.tvListOfMealName);
+            btnAddToFavItem=v.findViewById(R.id.btnAddToFavItem);
+
         }
     }
 }

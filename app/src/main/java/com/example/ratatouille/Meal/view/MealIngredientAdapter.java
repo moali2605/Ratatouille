@@ -1,6 +1,9 @@
 package com.example.ratatouille.Meal.view;
 
+import static home.view.HomeFragment.TAG;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +13,54 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAdapter.viewHolder> {
-    List<MealDto> myList = new ArrayList<>();
+
+    MealDto meal;
     List<String> ingredientName = new ArrayList<>();
     List<String> ingredientMeasure = new ArrayList<>();
 
     Context context;
 
 
-    public void setList(List<MealDto>myList){
-        this.myList=myList;
+    public void setList(MealDto meal){
+        this.meal=meal;
+        ingredientName.clear();
+        ingredientMeasure.clear();
+        for (int i = 1; i <= 20; i++) {
+            String ingredient = null;
+            String measurement = null;
+            try {
+                String ingredientMethodName = "getStrIngredient" + i;
+                Log.d(TAG, "Invoking method: " + ingredientMethodName);
+                ingredient = (String) meal.getClass().getMethod(ingredientMethodName).invoke(meal);
+                String measurementMethodName = "getStrMeasure" + i;
+                Log.d(TAG, "Invoking method: " + measurementMethodName);
+                measurement = (String) meal.getClass().getMethod(measurementMethodName).invoke(meal);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchMethodException e) {
+
+                Log.i("aaaaaaa", "setList: "+meal.getStrIngredient1());
+            }
+
+            assert ingredient != null;
+            if (!ingredient.equals("")) {
+                ingredientName.add(ingredient);
+                ingredientMeasure.add(measurement);
+            }
+        }
+
         notifyDataSetChanged();
     }
     public MealIngredientAdapter (Context context){
@@ -40,36 +75,21 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        for (int i = 1; i <= 20; i++) {
-            String ingredient = null;
-            String measure = null;
-            try {
-                ingredient = (String) getClass().getDeclaredField("strIngredient" + i).get(myList);
-                measure = (String) getClass().getDeclaredField("strMeasure" + i).get(myList);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
-            }
-            if (ingredient != null && !ingredient.isEmpty()) {
-                ingredientName.add(ingredient);
-                ingredientMeasure.add(measure);
-            }
-
-        }
-       // holder.tvNameIngredient.setText();
+        holder.tvNameIngredient.setText(ingredientName.get(position));
+        holder.tvMeasureIngredient.setText(ingredientMeasure.get(position));
+        Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+ingredientName.get(position)+"-small.png"
+                )
+                .apply(new RequestOptions().override(200, 200))
+                .placeholder(R.drawable.profilphoto)
+                .error(R.drawable.profilphoto).into(holder.ivIngredient);
 
     }
 
     @Override
     public int getItemCount() {
-        return myList.size();
+        return ingredientName.size();
     }
 
-    public void setList(ArrayList<MealDto> myList) {
-        this.myList = myList;
-        notifyDataSetChanged();
-    }
 
     public class viewHolder extends RecyclerView.ViewHolder {
 

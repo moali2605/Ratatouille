@@ -46,7 +46,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/ivFavMeal"
+                        android:id="@+id/ivListByMeal"
                         android:layout_width="0dp"
                         android:layout_height="250dp"
                         tools:src="@drawable/image"
@@ -57,19 +57,20 @@
                         android:scaleType="centerCrop"/>
 
                     <TextView
-                        android:id="@+id/tvFavName"
+                        android:id="@+id/tvListOfMealName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="28dp"
                         android:layout_marginTop="32dp"
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivFavMeal"
+                        app:layout_constraintTop_toBottomOf="@+id/ivListByMeal"
                         tools:text="Pizza sea Food"
                         android:textStyle="bold"/>
 
                     <ImageButton
                         android:id="@+id/btnFavDI"
+                        style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="110dp"
@@ -77,6 +78,7 @@
                         android:backgroundTint="#00FFFFFF"
                         android:scaleType="centerCrop"
                         android:src="@drawable/goldstar"
+                        app:rippleColor="@color/green"
                         app:layout_constraintBottom_toBottomOf="@+id/btnDI"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btnDI"
@@ -90,8 +92,8 @@
                         android:layout_marginTop="20dp"
                         android:text="Add To Daily"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="@+id/tvFavName"
-                        app:layout_constraintTop_toBottomOf="@+id/tvFavName" />
+                        app:layout_constraintStart_toStartOf="@+id/tvListOfMealName"
+                        app:layout_constraintTop_toBottomOf="@+id/tvListOfMealName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
             <TextView

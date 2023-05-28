@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +16,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.ratatouille.Meal.MealFragmentArgs;
+
 import com.example.ratatouille.Meal.presenter.MealPresenter;
 import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class MealFragment extends Fragment implements ViewMealInterface {
@@ -31,6 +35,8 @@ public class MealFragment extends Fragment implements ViewMealInterface {
 
     MealIngredientAdapter ingredientAdapter;
     MealPresenter mealPresenter;
+    RecyclerView recyclerView;
+    YouTubePlayerView playerView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -76,6 +82,7 @@ public class MealFragment extends Fragment implements ViewMealInterface {
         tvCatogry = v.findViewById(R.id.tvCatogry);
         tvCountry = v.findViewById(R.id.tvCountry);
         tvDescription = v.findViewById(R.id.tvDescription);
+        playerView=v.findViewById(R.id.videoPlayer);
         Glide.with(getContext()).load(meal.getStrMealThumb())
                 .apply(new RequestOptions().override(400, 250))
                 .placeholder(R.drawable.profilphoto)
@@ -84,13 +91,42 @@ public class MealFragment extends Fragment implements ViewMealInterface {
         tvCountry.setText(meal.getStrArea());
         tvCatogry.setText(meal.getStrCategory());
         tvDescription.setText(meal.getStrInstructions());
+
+        if (!meal.getStrYoutube().isEmpty()) {
+            playerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                    String videoId = extractVideoIdFromUrl(meal.getStrYoutube());
+                    youTubePlayer.loadVideo(videoId, 0);
+                    youTubePlayer.pause();
+                }
+            });
+        }
+
+        recyclerView=v.findViewById(R.id.rvIngredient);
+        LinearLayoutManager linearLayoutManagerIngredient = new LinearLayoutManager(getContext());
+        linearLayoutManagerIngredient.setOrientation(recyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManagerIngredient);
+        ingredientAdapter=new MealIngredientAdapter(getContext());
+        recyclerView.setAdapter(ingredientAdapter);
+
         mealPresenter.getMeal(meal);
+
+
     }
 
-
+    public static String extractVideoIdFromUrl(String url) {
+        String videoId = null;
+        Pattern pattern = Pattern.compile("(?<=v(=|/))([\\w-]+)");
+        Matcher matcher = pattern.matcher(url);
+        if (matcher.find()) {
+            videoId = matcher.group();
+        }
+        return videoId;
+    }
     @Override
     public void getMeal(MealDto meal) {
-        ingredientAdapter.setList(Arrays.asList(meal));
+        ingredientAdapter.setList(meal);
         ingredientAdapter.notifyDataSetChanged();
     }
 }

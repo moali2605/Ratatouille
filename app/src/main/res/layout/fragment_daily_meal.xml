@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Saturday"
+                android:text="@string/saturday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Sunday"
+                android:text="@string/sunday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Monday"
+                android:text="@string/monday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Tuesday"
+                android:text="@string/tuesday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Wednesday"
+                android:text="@string/wednesday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Thursday"
+                android:text="@string/thursday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Friday"
+                android:text="@string/friday"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView

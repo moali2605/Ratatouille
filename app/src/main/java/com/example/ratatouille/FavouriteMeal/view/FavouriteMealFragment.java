@@ -59,7 +59,7 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        recyclerView=v.findViewById(R.id.rvFavourite);
+        recyclerView=v.findViewById(R.id.rvListOf_item);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);

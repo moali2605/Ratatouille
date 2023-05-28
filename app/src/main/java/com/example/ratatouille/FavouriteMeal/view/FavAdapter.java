@@ -1,9 +1,6 @@
 package com.example.ratatouille.FavouriteMeal.view;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +71,9 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
 
         public viewHolder(@NonNull View v) {
             super(v);
-            ivFavMeal=v.findViewById(R.id.ivFavMeal);
-            tvFavName=v.findViewById(R.id.tvFavName);
-            btnAddToDaily=v.findViewById(R.id.btnAddToDaily);
+            ivFavMeal=v.findViewById(R.id.ivListByMeal);
+            tvFavName=v.findViewById(R.id.tvListOfMealName);
+            btnAddToDaily=v.findViewById(R.id.btnAddToFavItem);
             btnDelete=v.findViewById(R.id.btnDelete);
 
 

@@ -276,6 +276,7 @@ public class MealDto implements Parcelable {
     }
 
     public String getStrIngredient1() {
+
         return strIngredient1;
     }
 
@@ -284,6 +285,7 @@ public class MealDto implements Parcelable {
     }
 
     public String getStrIngredient2() {
+
         return strIngredient2;
     }
 
