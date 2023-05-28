@@ -8,25 +8,65 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ratatouille.home.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_showListOfMealFragment"
+            app:destination="@id/showListOfMealFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dailyMealFragment"
         android:name="com.example.ratatouille.DailyMeal.DailyMealFragment"
         android:label="fragment_daily_meal"
-        tools:layout="@layout/fragment_daily_meal" />
+        tools:layout="@layout/fragment_daily_meal" >
+        <action
+            android:id="@+id/action_dailyMealFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favouriteMealFragment"
-        android:name="com.example.ratatouille.FavouriteMeal.FavouriteMealFragment"
+        android:name="com.example.ratatouille.FavouriteMeal.view.FavouriteMealFragment"
         android:label="fragment_favourite_meal"
-        tools:layout="@layout/fragment_favourite_meal" />
+        tools:layout="@layout/fragment_favourite_meal" >
+        <action
+            android:id="@+id/action_favouriteMealFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.ratatouille.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.ratatouille.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="com.example.ratatouille.Meal.view.MealFragment"
+        android:label="fragment_meal"
+        tools:layout="@layout/fragment_meal" >
+        <argument
+            android:name="meal"
+            app:argType="com.example.ratatouille.model.MealDto" />
+    </fragment>
+    <fragment
+        android:id="@+id/showListOfMealFragment"
+        android:name="com.example.ratatouille.Ingredient.ShowListOfMealFragment"
+        android:label="fragment_show_list_of_meal"
+        tools:layout="@layout/fragment_show_list_of_meal" >
+        <action
+            android:id="@+id/action_showListOfMealFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+        <argument
+            android:name="typeOfMeal"
+            app:argType="com.example.ratatouille.model.MealDto" />
+    </fragment>
 </navigation>

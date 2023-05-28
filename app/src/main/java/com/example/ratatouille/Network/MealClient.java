@@ -1,9 +1,13 @@
 package com.example.ratatouille.Network;
 
+import android.util.Log;
+
 import com.example.ratatouille.model.ArrayMealDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,6 +20,7 @@ public class MealClient implements RemoteSource {
     private static final String TAG = "Client";
 
     private static MealClient client = null;
+    private  static ApiInterface apiInterFace;
 
     private MealClient() {
     }
@@ -23,13 +28,22 @@ public class MealClient implements RemoteSource {
     public static MealClient getInstance() {
         if (client == null) {
             client = new MealClient();
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client2 = new OkHttpClient.Builder()
+                    .addInterceptor(loggingInterceptor)
+                    .build();
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client2)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            apiInterFace = retrofit.create(ApiInterface.class);
         }
         return client;
     }
-    Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    ApiInterface apiInterFace = retrofit.create(ApiInterface.class);
+
+
+
+
 
 
     @Override
@@ -116,15 +130,19 @@ public class MealClient implements RemoteSource {
     @Override
     public void enqueueRandomMeal(NetworkDelegate networkDelegate) {
         Call<ArrayMealDto> callRandomMeal = apiInterFace.getRandomMeal();
+        Log.i(TAG, "enqueueRandomMeal: getRandom meal in network");
         callRandomMeal.enqueue(new Callback<ArrayMealDto>() {
             @Override
             public void onResponse(Call<ArrayMealDto> call, Response<ArrayMealDto> response) {
                 networkDelegate.onSuccessResult(response.body().getMeal());
+                Log.i(TAG, "enqueueRandomMeal: getRandom meal in network onResponse");
+
             }
 
             @Override
             public void onFailure(Call<ArrayMealDto> call, Throwable t) {
                 networkDelegate.onFailureResult(t.getMessage());
+                Log.i(TAG, "enqueueRandomMeal: getRandom meal in network onFailure");
             }
         });
     }

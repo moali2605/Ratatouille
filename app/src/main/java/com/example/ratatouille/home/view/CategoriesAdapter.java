@@ -41,7 +41,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.vi
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
         holder.tvItemName.setText(myList.get(position).getStrCategory());
-        Glide.with(context).load("https://www.themealdb.com/images/category/+"+myList.get(position).getStrCategory()+".png")
+        Glide.with(context).load("https://www.themealdb.com/images/category/"+myList.get(position).getStrCategory()+".png")
                 .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivItem);
@@ -64,7 +64,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.vi
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemName=itemView.findViewById(R.id.tvItemName);
-            ivItem=itemView.findViewById(R.id.ivItem);
+            ivItem=itemView.findViewById(R.id.ivIngredient);
         }
     }
 }
