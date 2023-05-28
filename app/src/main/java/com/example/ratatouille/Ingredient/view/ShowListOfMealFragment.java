@@ -65,8 +65,8 @@ public class ShowListOfMealFragment extends Fragment implements ViewListOfMealIn
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        String search= ShowListOfMealFragmentArgs.fromBundle(getArguments()).toString();
-        listOfMealViewInterface.getMealByIngredient(search);
+        //String search= ShowListOfMealFragmentArgs.fromBundle(getArguments()).toString();
+        //listOfMealViewInterface.getMealByIngredient(search);
 
         recyclerView = v.findViewById(R.id.rvListOf_item);
         LinearLayoutManager linearLayoutManagerCountry = new LinearLayoutManager(getContext());

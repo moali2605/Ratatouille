@@ -71,8 +71,8 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
 
         public viewHolder(@NonNull View v) {
             super(v);
-            ivFavMeal=v.findViewById(R.id.ivListByMeal);
-            tvFavName=v.findViewById(R.id.tvListOfMealName);
+            ivFavMeal=v.findViewById(R.id.ivDailyInspiration);
+            tvFavName=v.findViewById(R.id.tvDIName);
             btnAddToDaily=v.findViewById(R.id.btnAddToFavItem);
             btnDelete=v.findViewById(R.id.btnDelete);
 

@@ -9,8 +9,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,27 +47,27 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/ivListByMeal"
+                        android:id="@+id/ivDailyInspiration"
                         android:layout_width="0dp"
                         android:layout_height="250dp"
-                        tools:src="@drawable/image"
+                        android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:scaleType="centerCrop"/>
+                        tools:src="@drawable/image" />
 
                     <TextView
-                        android:id="@+id/tvListOfMealName"
+                        android:id="@+id/tvDIName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="28dp"
                         android:layout_marginTop="32dp"
                         android:textSize="20sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivListByMeal"
-                        tools:text="Pizza sea Food"
-                        android:textStyle="bold"/>
+                        app:layout_constraintTop_toBottomOf="@+id/ivDailyInspiration"
+                        tools:text="Pizza sea Food" />
 
                     <ImageButton
                         android:id="@+id/btnFavDI"
@@ -78,11 +79,11 @@
                         android:backgroundTint="#00FFFFFF"
                         android:scaleType="centerCrop"
                         android:src="@drawable/goldstar"
-                        app:rippleColor="@color/green"
                         app:layout_constraintBottom_toBottomOf="@+id/btnDI"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btnDI"
-                        app:layout_constraintTop_toTopOf="@+id/btnDI" />
+                        app:layout_constraintTop_toTopOf="@+id/btnDI"
+                        app:rippleColor="@color/green" />
 
                     <Button
                         android:id="@+id/btnDI"
@@ -92,10 +93,11 @@
                         android:layout_marginTop="20dp"
                         android:text="Add To Daily"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="@+id/tvListOfMealName"
-                        app:layout_constraintTop_toBottomOf="@+id/tvListOfMealName" />
+                        app:layout_constraintStart_toStartOf="@+id/tvDIName"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDIName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
@@ -104,14 +106,16 @@
                 android:text="Ingredient Meals"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMbyIngredient"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginLeft="16dp"
-                tools:listitem="@layout/avater_list_item"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/avater_list_item" />
+
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"

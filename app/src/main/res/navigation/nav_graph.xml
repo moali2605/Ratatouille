@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_homeFragment_to_mealFragment"
             app:destination="@id/mealFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_showListOfMealFragment"
-            app:destination="@id/showListOfMealFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyMealFragment"
@@ -52,11 +49,7 @@
         android:id="@+id/mealFragment"
         android:name="com.example.ratatouille.Meal.view.MealFragment"
         android:label="fragment_meal"
-        tools:layout="@layout/fragment_meal" >
-        <argument
-            android:name="meal"
-            app:argType="com.example.ratatouille.model.MealDto" />
-    </fragment>
+        tools:layout="@layout/fragment_meal" />
     <fragment
         android:id="@+id/showListOfMealFragment"
         android:name="com.example.ratatouille.Ingredient.view.ShowListOfMealFragment"

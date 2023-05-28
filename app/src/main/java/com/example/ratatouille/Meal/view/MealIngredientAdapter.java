@@ -1,6 +1,6 @@
 package com.example.ratatouille.Meal.view;
 
-import static home.view.HomeFragment.TAG;
+import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.util.Log;

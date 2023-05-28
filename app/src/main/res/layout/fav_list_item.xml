@@ -29,7 +29,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/ivListByMeal"
+                android:id="@+id/ivDailyInspiration"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
@@ -39,16 +39,16 @@
                 tools:src="@drawable/image" />
 
             <TextView
-                android:id="@+id/tvListOfMealName"
+                android:id="@+id/tvDIName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginLeft="16dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/ivListByMeal"
-                app:layout_constraintStart_toStartOf="@+id/ivListByMeal"
-                app:layout_constraintTop_toBottomOf="@+id/ivListByMeal"
+                app:layout_constraintEnd_toEndOf="@+id/ivDailyInspiration"
+                app:layout_constraintStart_toStartOf="@+id/ivDailyInspiration"
+                app:layout_constraintTop_toBottomOf="@+id/ivDailyInspiration"
                 tools:text="Pizza sea Food" />
 
             <Button
@@ -62,8 +62,8 @@
                 android:text="Add To Daily"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/ivListByMeal"
-                app:layout_constraintTop_toBottomOf="@+id/tvListOfMealName" />
+                app:layout_constraintStart_toStartOf="@+id/ivDailyInspiration"
+                app:layout_constraintTop_toBottomOf="@+id/tvDIName" />
 
             <Button
                 android:id="@+id/btnDelete"
@@ -74,7 +74,7 @@
                 android:text="Delete"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/btnAddToFavItem"
-                app:layout_constraintEnd_toEndOf="@+id/ivListByMeal"
+                app:layout_constraintEnd_toEndOf="@+id/ivDailyInspiration"
                 app:layout_constraintStart_toEndOf="@+id/btnAddToFavItem"
                 app:layout_constraintTop_toTopOf="@+id/btnAddToFavItem"
                 app:layout_constraintVertical_bias="0.0" />
