@@ -23,13 +23,14 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.vi
     List<MealDto> myList = new ArrayList<>();
     Context context;
 
-
+    InsertInterface insertInterface;
     public void setList(List<MealDto>myList){
         this.myList=myList;
         notifyDataSetChanged();
     }
-    public IngredientAdapter (Context context){
+    public IngredientAdapter (Context context,InsertInterface insertInterface){
         this.context=context;
+        this.insertInterface=insertInterface;
     }
 
     @NonNull
@@ -45,6 +46,9 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.vi
                 .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivItem);
+        holder.ivItem.setOnClickListener(v -> {
+            insertInterface.onClickIngredient(myList.get(position).getStrIngredient());
+        });
     }
 
     @Override
@@ -63,7 +67,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.vi
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemName=itemView.findViewById(R.id.tvItemName);
-            ivItem=itemView.findViewById(R.id.ivIngredient);
+            ivItem=itemView.findViewById(R.id.ivProfile);
         }
     }
 }

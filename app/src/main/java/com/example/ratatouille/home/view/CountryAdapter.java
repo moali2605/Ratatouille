@@ -64,7 +64,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.veiwHold
         public veiwHolder(@NonNull View itemView) {
             super(itemView);
             tvItemName=itemView.findViewById(R.id.tvItemName);
-            ivItem=itemView.findViewById(R.id.ivIngredient);
+            ivItem=itemView.findViewById(R.id.ivProfile);
         }
     }
 }

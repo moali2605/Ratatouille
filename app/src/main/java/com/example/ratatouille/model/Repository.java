@@ -43,7 +43,7 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void getMealById(NetworkDelegate networkDelegate, String search) {
+    public void getMealById(NetworkDelegate networkDelegate, int search) {
         remoteSource.enqueueCallId(networkDelegate,search);
     }
 

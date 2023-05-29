@@ -50,7 +50,7 @@
                 tools:text="Pizza sea Food" />
 
             <Button
-                android:id="@+id/btnAddToFavItem"
+                android:id="@+id/btnAboutApp"
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

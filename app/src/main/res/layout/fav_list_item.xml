@@ -52,7 +52,7 @@
                 tools:text="Pizza sea Food" />
 
             <Button
-                android:id="@+id/btnAddToFavItem"
+                android:id="@+id/btnAboutApp"
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,10 +73,10 @@
                 android:layout_marginEnd="16dp"
                 android:text="Delete"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnAddToFavItem"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAboutApp"
                 app:layout_constraintEnd_toEndOf="@+id/ivDailyInspiration"
-                app:layout_constraintStart_toEndOf="@+id/btnAddToFavItem"
-                app:layout_constraintTop_toTopOf="@+id/btnAddToFavItem"
+                app:layout_constraintStart_toEndOf="@+id/btnAboutApp"
+                app:layout_constraintTop_toTopOf="@+id/btnAboutApp"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

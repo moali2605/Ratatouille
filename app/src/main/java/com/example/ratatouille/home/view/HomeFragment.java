@@ -29,10 +29,10 @@ import com.example.ratatouille.model.Repository;
 
 import java.util.Arrays;
 
-import home.view.HomeFragmentDirections;
+//import home.view.HomeFragmentDirections;
 
 
-public class HomeFragment extends Fragment implements ViewInterface {
+public class HomeFragment extends Fragment implements ViewInterface,InsertInterface {
 
     HomePresenter homePresenter;
     TextView tvDIName;
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment implements ViewInterface {
         LinearLayoutManager linearLayoutManagerIngredient = new LinearLayoutManager(getContext());
         linearLayoutManagerIngredient.setOrientation(recyclerViewIngredient.HORIZONTAL);
         recyclerViewIngredient.setLayoutManager(linearLayoutManagerIngredient);
-        ingredientAdapter = new IngredientAdapter(getContext());
+        ingredientAdapter = new IngredientAdapter(getContext(),this);
         recyclerViewIngredient.setAdapter(ingredientAdapter);
 
         //recyclerViewCategories
@@ -132,8 +132,8 @@ public class HomeFragment extends Fragment implements ViewInterface {
             homePresenter.addToFav(meal[0]);
         });
         cvDailyInspiration.setOnClickListener(v -> {
-            //home.view.HomeFragmentDirections.ActionHomeFragmentToMealFragment action=HomeFragmentDirections.actionHomeFragmentToMealFragment(meal[0]);
-            //Navigation.findNavController(getView()).navigate(action);
+            HomeFragmentDirections.ActionHomeFragmentToMealFragment action=HomeFragmentDirections.actionHomeFragmentToMealFragment(meal[0]);
+            Navigation.findNavController(getView()).navigate(action);
         });
     }
 
@@ -156,4 +156,19 @@ public class HomeFragment extends Fragment implements ViewInterface {
     }
 
 
+    @Override
+    public void onClickIngredient(String search) {
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search);
+        Navigation.findNavController(getView()).navigate(action);
+    }
+
+    @Override
+    public void onClickCategories(String search) {
+
+    }
+
+    @Override
+    public void onClickCountry(String search) {
+
+    }
 }

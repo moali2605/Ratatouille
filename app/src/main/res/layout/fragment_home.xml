@@ -61,7 +61,7 @@
                         android:id="@+id/tvDIName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="28dp"
+                        android:layout_marginStart="120dp"
                         android:layout_marginTop="32dp"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -69,37 +69,24 @@
                         app:layout_constraintTop_toBottomOf="@+id/ivDailyInspiration"
                         tools:text="Pizza sea Food" />
 
-                    <ImageButton
-                        android:id="@+id/btnFavDI"
-                        style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="110dp"
-                        android:layout_marginEnd="28dp"
-                        android:backgroundTint="#00FFFFFF"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/goldstar"
-                        app:layout_constraintBottom_toBottomOf="@+id/btnDI"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/btnDI"
-                        app:layout_constraintTop_toTopOf="@+id/btnDI"
-                        app:rippleColor="@color/green" />
-
                     <Button
-                        android:id="@+id/btnDI"
+                        android:id="@+id/btnFavDI"
                         style="@style/Widget.Material3.Button.ElevatedButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="20dp"
-                        android:text="Add To Daily"
+                        android:layout_marginEnd="32dp"
+                        android:text="Add To Favourite"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="@+id/tvDIName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvDIName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/tvProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

@@ -7,7 +7,7 @@
     tools:context=".profile.ProfileFragment">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
@@ -18,11 +18,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivIngredient" />
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivIngredient"
+        android:id="@+id/ivProfile"
         android:layout_width="155dp"
         android:layout_height="166dp"
         android:layout_marginStart="128dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLogout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnAddToFavItem"
+        android:id="@+id/btnAboutApp"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,8 +56,8 @@
         android:layout_marginBottom="32dp"
         android:text="About Ratatouille"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="@+id/btnLogout"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>

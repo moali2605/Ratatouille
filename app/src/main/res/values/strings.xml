@@ -55,7 +55,7 @@
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="daily_inspiration">Daily Inspiration</string>
+    <string name="daily_inspiration">Daily Inspirations</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="monday">Monday</string>
@@ -64,4 +64,6 @@
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
     <string name="choose_a_day">Choose a day</string>
+    <string name="it_is_application_to_handel_meal_planning">It is application to handel meal planning</string>
+    <string name="ratatouille">Ratatouille</string>
 </resources>

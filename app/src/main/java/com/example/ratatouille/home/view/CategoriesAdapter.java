@@ -22,7 +22,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ve
     List<MealDto> myList = new ArrayList<>();
     Context context;
 
-
     public void setList(List<MealDto> myList){
         this.myList=myList;
         notifyDataSetChanged();
@@ -67,7 +66,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ve
         public veiwHolder(@NonNull View itemView) {
             super(itemView);
             tvItemName=itemView.findViewById(R.id.tvItemName);
-            ivItem=itemView.findViewById(R.id.ivIngredient);
+            ivItem=itemView.findViewById(R.id.ivProfile);
         }
     }
 

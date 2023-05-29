@@ -76,7 +76,7 @@ public class MealFragment extends Fragment implements ViewMealInterface {
         super.onViewCreated(v, savedInstanceState);
         mealPresenter=new MealPresenter(this);
         ingredientAdapter=new MealIngredientAdapter(getContext());
-        //meal = MealFragmentArgs.fromBundle(getArguments()).getMeal();
+        meal = MealFragmentArgs.fromBundle(getArguments()).getMeal();
         ivMeal = v.findViewById(R.id.ivMeal);
         tvMeal = v.findViewById(R.id.tvMeal);
         tvCatogry = v.findViewById(R.id.tvCatogry);

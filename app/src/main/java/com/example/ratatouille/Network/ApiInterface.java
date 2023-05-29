@@ -6,16 +6,17 @@ import com.example.ratatouille.model.MealDto;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
-    @GET("filter.php?i={ingredient}")
-    Call<ArrayMealDto> getMealsByIngredient(@Path("ingredient")String ingredient);
-    @GET("filter.php?c={categories}")
-    Call<ArrayMealDto> getMealsByCategories(@Path("categories")String categories);
-    @GET("filter.php?a={country}")
-    Call<ArrayMealDto> getMealsByCountry(@Path("categories")String country);
-    @GET("lookup.php?i={id}")
-    Call<ArrayMealDto> getMealsById(@Path("id")String id);
+    @GET("filter.php")
+    Call<ArrayMealDto> getMealsByIngredient(@Query("i") String ingredient);
+    @GET("filter.php")
+    Call<ArrayMealDto> getMealsByCategories(@Query("c") String category);
+    @GET("filter.php")
+    Call<ArrayMealDto> getMealsByCountry(@Query("a") String area);
+    @GET("lookup.php")
+    Call<ArrayMealDto> getMealsById(@Query("i") int id);
     @GET("search.php?s={name}")
     Call<ArrayMealDto> getMealsByName(@Path("name")String name);
     @GET("random.php")

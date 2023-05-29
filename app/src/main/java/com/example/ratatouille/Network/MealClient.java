@@ -96,7 +96,7 @@ public class MealClient implements RemoteSource {
     }
 
     @Override
-    public void enqueueCallId(NetworkDelegate networkDelegate, String search) {
+    public void enqueueCallId(NetworkDelegate networkDelegate, int search) {
         Call<ArrayMealDto> callId = apiInterFace.getMealsById(search);
         callId.enqueue(new Callback<ArrayMealDto>() {
             @Override

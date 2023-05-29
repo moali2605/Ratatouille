@@ -64,7 +64,7 @@ public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAd
             super(v);
             ivListByMeal=v.findViewById(R.id.ivDailyInspiration);
             tvListOfMealName=v.findViewById(R.id.tvDIName);
-            btnAddToFavItem=v.findViewById(R.id.btnAddToFavItem);
+            btnAddToFavItem=v.findViewById(R.id.btnAboutApp);
 
         }
     }

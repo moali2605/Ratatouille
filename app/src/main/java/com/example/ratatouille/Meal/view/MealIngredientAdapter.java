@@ -98,7 +98,7 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
 
         public viewHolder(@NonNull View v) {
             super(v);
-            ivIngredient=v.findViewById(R.id.ivIngredient);
+            ivIngredient=v.findViewById(R.id.ivProfile);
             tvNameIngredient=v.findViewById(R.id.name_ingredient);
             tvMeasureIngredient=v.findViewById(R.id.measure_ingredient);
         }

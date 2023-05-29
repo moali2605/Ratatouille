@@ -12,7 +12,7 @@ public interface RepositoryInterface {
     public void getMealByCategories(NetworkDelegate networkDelegate, String search);
 
     public void getMealByCountry(NetworkDelegate networkDelegate, String search);
-    public void getMealById(NetworkDelegate networkDelegate, String search);
+    public void getMealById(NetworkDelegate networkDelegate, int search);
     public void getMealByName(NetworkDelegate networkDelegate, String search);
     public void getMealRandom(NetworkDelegate networkDelegate);
     public void getIngredient(NetworkDelegate networkDelegate);
