@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search.SearchFragment" >
+    tools:context=".search.view.SearchFragment" >
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/recipe_textfield"
@@ -26,7 +26,7 @@
         app:startIconTint="@color/green">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_recipe"
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
@@ -35,6 +35,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearch"
         android:layout_width="409dp"
         android:layout_height="636dp"
         android:layout_marginTop="16dp"

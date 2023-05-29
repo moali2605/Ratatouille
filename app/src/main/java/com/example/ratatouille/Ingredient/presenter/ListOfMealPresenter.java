@@ -37,4 +37,9 @@ public class ListOfMealPresenter implements NetworkDelegate, ListOfMealViewInter
     public void getMealByCountry(String search) {
         repo.getMealByCountry(this,search);
     }
+
+    @Override
+    public void addToFav(MealDto meal) {
+        repo.insertMeal(meal);
+    }
 }

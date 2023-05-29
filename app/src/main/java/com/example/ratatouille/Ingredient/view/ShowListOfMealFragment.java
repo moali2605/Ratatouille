@@ -106,4 +106,9 @@ public class ShowListOfMealFragment extends Fragment implements ViewListOfMealIn
         com.example.ratatouille.Ingredient.view.ShowListOfMealFragmentDirections.ActionShowListOfMealFragmentToMealFragment action=ShowListOfMealFragmentDirections.actionShowListOfMealFragmentToMealFragment(meal);
         Navigation.findNavController(getView()).navigate(action);
     }
+
+    @Override
+    public void onClickFav(MealDto meal) {
+        listOfMealPresenter.addToFav(meal);
+    }
 }

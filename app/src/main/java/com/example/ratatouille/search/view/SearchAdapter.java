@@ -1,4 +1,4 @@
-package com.example.ratatouille.Ingredient.view;
+package com.example.ratatouille.search.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ratatouille.R;
@@ -21,19 +20,17 @@ import com.example.ratatouille.model.MealDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAdapter.viewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder> {
     List<MealDto> myList = new ArrayList<>();
+    SearchInsertInterface insertInterface;
     Context context;
-    OnClickShowMealInterface onClickShowMealInterface;
-
-    public void setList(List<MealDto> myList) {
-        this.myList = myList;
+    public void setList(List<MealDto> myList){
+        this.myList=myList;
         notifyDataSetChanged();
     }
-
-    public ShowListOfMealAdapter(Context context,OnClickShowMealInterface  onClickShowMealInterface) {
+    public SearchAdapter(Context context,SearchInsertInterface insertInterface) {
         this.context = context;
-        this.onClickShowMealInterface=onClickShowMealInterface;
+        this.insertInterface=insertInterface;
     }
 
     @NonNull
@@ -50,12 +47,11 @@ public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAd
                 .apply(new RequestOptions().override(400, 250))
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivListByMeal);
-        holder.cvItem.setOnClickListener(v -> {
-            onClickShowMealInterface.onClick(myList.get(position));
-        });
-
         holder.btnAddToFavItem.setOnClickListener(v -> {
-            onClickShowMealInterface.onClickFav(myList.get(position));
+            insertInterface.onClick(myList.get(position));
+        });
+        holder.cvItem.setOnClickListener(v -> {
+            insertInterface.onClickShowMeal(myList.get(position));
         });
     }
 
@@ -75,7 +71,6 @@ public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAd
         TextView tvListOfMealName;
         Button btnAddToFavItem;
         CardView cvItem;
-
         public viewHolder(@NonNull View v) {
             super(v);
             ivListByMeal = v.findViewById(R.id.ivDailyInspiration);
