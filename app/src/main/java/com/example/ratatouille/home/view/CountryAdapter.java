@@ -20,14 +20,16 @@ import java.util.List;
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.veiwHolder> {
     List<MealDto> myList = new ArrayList<>();
     Context context;
+    InsertInterface insertInterface;
 
 
     public void setList(List<MealDto>myList){
         this.myList=myList;
         notifyDataSetChanged();
     }
-    public CountryAdapter (Context context){
+    public CountryAdapter (Context context,InsertInterface insertInterface){
         this.context=context;
+        this.insertInterface=insertInterface;
     }
 
     @NonNull
@@ -45,6 +47,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.veiwHold
 //                .apply(new RequestOptions().override(200, 200))
 //                .placeholder(R.drawable.profilphoto)
 //                .error(R.drawable.profilphoto).into(holder.ivItem);
+        holder.ivItem.setOnClickListener(v -> {
+            insertInterface.onClickCountry(myList.get(position).getStrArea());
+        });
     }
 
     @Override

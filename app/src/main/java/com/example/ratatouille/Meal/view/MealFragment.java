@@ -1,5 +1,6 @@
 package com.example.ratatouille.Meal.view;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,18 +9,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import com.example.ratatouille.Meal.presenter.MealPresenter;
+import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
+import com.example.ratatouille.db.ConcreteLocalSource;
 import com.example.ratatouille.model.MealDto;
+import com.example.ratatouille.model.Repository;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -32,11 +38,14 @@ public class MealFragment extends Fragment implements ViewMealInterface {
     MealDto meal;
     ImageView ivMeal;
     TextView tvMeal, tvCountry, tvCatogry, tvDescription;
-
+    MealDto mealDto;
     MealIngredientAdapter ingredientAdapter;
-    MealPresenter mealPresenter;
+    //MealPresenter mealPresenter;
     RecyclerView recyclerView;
     YouTubePlayerView playerView;
+    MealViewInterface mealViewInterface;
+    Context context;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -45,6 +54,10 @@ public class MealFragment extends Fragment implements ViewMealInterface {
 
     public MealFragment() {
         // Required empty public constructor
+    }
+    public MealFragment(MealViewInterface mealViewInterface, Context context) {
+        this.mealViewInterface=mealViewInterface;
+        this.context=context;
     }
 
     public static MealFragment newInstance(String param1, String param2) {
@@ -74,34 +87,20 @@ public class MealFragment extends Fragment implements ViewMealInterface {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        mealPresenter=new MealPresenter(this);
+        //mealPresenter=new MealPresenter(this, Repository.getInstance(MealClient.getInstance(), ConcreteLocalSource.getInstance(getContext()), getContext()));
+        mealViewInterface=new MealPresenter(this, Repository.getInstance(MealClient.getInstance(), ConcreteLocalSource.getInstance(getContext()), getContext()));
         ingredientAdapter=new MealIngredientAdapter(getContext());
         meal = MealFragmentArgs.fromBundle(getArguments()).getMeal();
+        //mealPresenter.getMealByName(meal.getStrMeal());
+        mealViewInterface.getMealByName(meal.getStrMeal());
         ivMeal = v.findViewById(R.id.ivMeal);
         tvMeal = v.findViewById(R.id.tvMeal);
         tvCatogry = v.findViewById(R.id.tvCatogry);
         tvCountry = v.findViewById(R.id.tvCountry);
         tvDescription = v.findViewById(R.id.tvDescription);
         playerView=v.findViewById(R.id.videoPlayer);
-        Glide.with(getContext()).load(meal.getStrMealThumb())
-                .apply(new RequestOptions().override(400, 250))
-                .placeholder(R.drawable.profilphoto)
-                .error(R.drawable.profilphoto).into(ivMeal);
-        tvMeal.setText(meal.getStrMeal());
-        tvCountry.setText(meal.getStrArea());
-        tvCatogry.setText(meal.getStrCategory());
-        tvDescription.setText(meal.getStrInstructions());
 
-        if (!meal.getStrYoutube().isEmpty()) {
-            playerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-                @Override
-                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                    String videoId = extractVideoIdFromUrl(meal.getStrYoutube());
-                    youTubePlayer.loadVideo(videoId, 0);
-                    youTubePlayer.pause();
-                }
-            });
-        }
+
 
         recyclerView=v.findViewById(R.id.rvIngredient);
         LinearLayoutManager linearLayoutManagerIngredient = new LinearLayoutManager(getContext());
@@ -110,7 +109,7 @@ public class MealFragment extends Fragment implements ViewMealInterface {
         ingredientAdapter=new MealIngredientAdapter(getContext());
         recyclerView.setAdapter(ingredientAdapter);
 
-        mealPresenter.getMeal(meal);
+
 
 
     }
@@ -124,9 +123,33 @@ public class MealFragment extends Fragment implements ViewMealInterface {
         }
         return videoId;
     }
+
     @Override
-    public void getMeal(MealDto meal) {
-        ingredientAdapter.setList(meal);
+    public void getSearchResult(MealDto[] meal) {
+        ingredientAdapter.setList(meal[0]);
         ingredientAdapter.notifyDataSetChanged();
+        mealDto=meal[0];
+        Glide.with(getContext()).load(mealDto.getStrMealThumb())
+                .apply(new RequestOptions().override(400, 250))
+                .placeholder(R.drawable.profilphoto)
+                .error(R.drawable.profilphoto).into(ivMeal);
+        tvMeal.setText(mealDto.getStrMeal());
+        tvCountry.setText(mealDto.getStrArea());
+        tvCatogry.setText(mealDto.getStrCategory());
+        tvDescription.setText(mealDto.getStrInstructions());
+
+        if (!mealDto.getStrYoutube().isEmpty()) {
+            playerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                    String videoId = extractVideoIdFromUrl(mealDto.getStrYoutube());
+                    youTubePlayer.loadVideo(videoId, 0);
+                    youTubePlayer.pause();
+                }
+            });
+        }else {
+            Toast.makeText(getContext(),"No Youtube Video",Toast.LENGTH_LONG).show();
+        }
+
     }
 }

@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
         LinearLayoutManager linearLayoutManagerCategories = new LinearLayoutManager(getContext());
         linearLayoutManagerCategories.setOrientation(recyclerViewCategories.HORIZONTAL);
         recyclerViewCategories.setLayoutManager(linearLayoutManagerCategories);
-        categoriesAdapter = new CategoriesAdapter(getContext());
+        categoriesAdapter = new CategoriesAdapter(getContext(),this);
         recyclerViewCategories.setAdapter(categoriesAdapter);
 
         //recyclerViewCountry
@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
         LinearLayoutManager linearLayoutManagerCountry = new LinearLayoutManager(getContext());
         linearLayoutManagerCountry.setOrientation(recyclerViewCountry.HORIZONTAL);
         recyclerViewCountry.setLayoutManager(linearLayoutManagerCountry);
-        countryAdapter = new CountryAdapter(getContext());
+        countryAdapter = new CountryAdapter(getContext(),this);
         recyclerViewCountry.setAdapter(countryAdapter);
 
         //call
@@ -159,17 +159,19 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
 
     @Override
     public void onClickIngredient(String search) {
-        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search);
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search,"ingredient");
         Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void onClickCategories(String search) {
-
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search,"categories");
+        Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void onClickCountry(String search) {
-
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search,"country");
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

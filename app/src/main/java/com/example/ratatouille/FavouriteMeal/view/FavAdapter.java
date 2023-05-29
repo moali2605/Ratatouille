@@ -1,6 +1,7 @@
 package com.example.ratatouille.FavouriteMeal.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,8 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
             deleteInterface.onClick(meal);
         });
         holder.cvFavMeal.setOnClickListener(v -> {
-            deleteInterface.onClickShowMeal(meal);
+
+            deleteInterface.onClickShowMeal(myList.get(position));
         });
     }
 

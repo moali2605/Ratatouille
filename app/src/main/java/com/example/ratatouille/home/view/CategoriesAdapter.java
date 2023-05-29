@@ -21,13 +21,14 @@ import java.util.List;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.veiwHolder> {
     List<MealDto> myList = new ArrayList<>();
     Context context;
-
+    InsertInterface insertInterface;
     public void setList(List<MealDto> myList){
         this.myList=myList;
         notifyDataSetChanged();
     }
-    public CategoriesAdapter (Context context){
+    public CategoriesAdapter (Context context,InsertInterface insertInterface){
         this.context=context;
+        this.insertInterface=insertInterface;
     }
 
     @NonNull
@@ -47,6 +48,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ve
                 .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivItem);
+        holder.ivItem.setOnClickListener(v -> {
+            insertInterface.onClickCategories(myList.get(position).getStrCategory());
+        });
     }
 
     @Override

@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
 
@@ -21,14 +24,16 @@ import java.util.List;
 public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAdapter.viewHolder> {
     List<MealDto> myList = new ArrayList<>();
     Context context;
+    OnClickShowMealInterface onClickShowMealInterface;
 
-
-    public void setList(List<MealDto> myList){
-        this.myList=myList;
+    public void setList(List<MealDto> myList) {
+        this.myList = myList;
         notifyDataSetChanged();
     }
-    public ShowListOfMealAdapter (Context context){
-        this.context=context;
+
+    public ShowListOfMealAdapter(Context context,OnClickShowMealInterface  onClickShowMealInterface) {
+        this.context = context;
+        this.onClickShowMealInterface=onClickShowMealInterface;
     }
 
     @NonNull
@@ -41,7 +46,17 @@ public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAd
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
         holder.tvListOfMealName.setText(myList.get(position).getStrMeal());
+        Glide.with(context).load(myList.get(position).getStrMealThumb())
+                .apply(new RequestOptions().override(400, 250))
+                .placeholder(R.drawable.profilphoto)
+                .error(R.drawable.profilphoto).into(holder.ivListByMeal);
+        holder.cvItem.setOnClickListener(v -> {
+            onClickShowMealInterface.onClick(myList.get(position));
+        });
 
+        holder.btnAddToFavItem.setOnClickListener(v -> {
+
+        });
     }
 
     @Override
@@ -59,13 +74,14 @@ public class ShowListOfMealAdapter extends RecyclerView.Adapter<ShowListOfMealAd
         ImageView ivListByMeal;
         TextView tvListOfMealName;
         Button btnAddToFavItem;
+        CardView cvItem;
 
         public viewHolder(@NonNull View v) {
             super(v);
-            ivListByMeal=v.findViewById(R.id.ivDailyInspiration);
-            tvListOfMealName=v.findViewById(R.id.tvDIName);
-            btnAddToFavItem=v.findViewById(R.id.btnAboutApp);
-
+            ivListByMeal = v.findViewById(R.id.ivDailyInspiration);
+            tvListOfMealName = v.findViewById(R.id.tvDIName);
+            btnAddToFavItem = v.findViewById(R.id.btnAboutApp);
+            cvItem=v.findViewById(R.id.cvItem);
         }
     }
 }

@@ -16,7 +16,7 @@ public class ListOfMealPresenter implements NetworkDelegate, ListOfMealViewInter
     }
     @Override
     public void onSuccessResult(MealDto[] mealDto) {
-        view.getMealByIngredient(mealDto);
+        view.getSearchResult(mealDto);
     }
 
     @Override
@@ -26,5 +26,15 @@ public class ListOfMealPresenter implements NetworkDelegate, ListOfMealViewInter
     @Override
     public void getMealByIngredient(String search) {
         repo.getMealByIngredient(this,search);
+    }
+
+    @Override
+    public void getMealByCategory(String search) {
+        repo.getMealByCategories(this,search);
+    }
+
+    @Override
+    public void getMealByCountry(String search) {
+        repo.getMealByCountry(this,search);
     }
 }

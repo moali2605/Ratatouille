@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "37288521635-mrfttdcn2ifjt2mege4carr6e4rg3pfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ratatouille",
+            "certificate_hash": "0ce9f4a42ec6c1b22ed305cd27e85c033eb3284f"
+          }
+        },
+        {
           "client_id": "37288521635-ri00hvvi1avqmnvmclksaeftp02tau6k.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -17,8 +17,8 @@ public interface ApiInterface {
     Call<ArrayMealDto> getMealsByCountry(@Query("a") String area);
     @GET("lookup.php")
     Call<ArrayMealDto> getMealsById(@Query("i") int id);
-    @GET("search.php?s={name}")
-    Call<ArrayMealDto> getMealsByName(@Path("name")String name);
+    @GET("search.php")
+    Call<ArrayMealDto> getMealsByName(@Query("s")String name);
     @GET("random.php")
     Call<ArrayMealDto> getRandomMeal();
     @GET("list.php?a=list")
