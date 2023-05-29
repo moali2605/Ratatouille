@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ratatouille.FavouriteMeal.presenter.FavouritePresenter;
+import com.example.ratatouille.FavouriteMeal.view.FavouriteMealFragmentDirections;
 import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
 import com.example.ratatouille.db.ConcreteLocalSource;
@@ -83,11 +85,20 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
 
     @Override
     public void onClick(MealDto meal) {
+
         favouritePresenter.deleteFromFav(meal);
+    }
+
+    @Override
+    public void onClickShowMeal(MealDto meal) {
+        com.example.ratatouille.FavouriteMeal.view.FavouriteMealFragmentDirections.ActionFavouriteMealFragmentToMealFragment action=FavouriteMealFragmentDirections.actionFavouriteMealFragmentToMealFragment(meal);
+        Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void getFavMeal(LiveData<List<MealDto>> meal) {
 
     }
+
+
 }

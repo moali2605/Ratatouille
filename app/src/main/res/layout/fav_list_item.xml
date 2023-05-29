@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvFavMeal"
         android:layout_width="375dp"
         android:layout_height="420dp"
         android:layout_gravity="top|center"
@@ -42,8 +43,8 @@
                 android:id="@+id/tvDIName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/ivDailyInspiration"

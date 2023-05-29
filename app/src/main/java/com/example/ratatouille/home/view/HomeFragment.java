@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
     HomePresenter homePresenter;
     TextView tvDIName;
     ImageView ivDailyInspiration;
-    ImageButton btnFavDI;
+    Button btnFavDI;
     public static String TAG = "MealApp";
     IngredientAdapter ingredientAdapter;
     RecyclerView recyclerViewIngredient, recyclerViewCategories, recyclerViewCountry;

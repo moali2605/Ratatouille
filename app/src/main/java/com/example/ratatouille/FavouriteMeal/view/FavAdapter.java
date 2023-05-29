@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -48,6 +49,9 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
             meal=myList.get(position);
             deleteInterface.onClick(meal);
         });
+        holder.cvFavMeal.setOnClickListener(v -> {
+            deleteInterface.onClickShowMeal(meal);
+        });
     }
 
     @Override
@@ -68,14 +72,14 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
         public ImageView ivFavMeal;
         TextView tvFavName;
         Button btnAddToDaily,btnDelete;
-
+        CardView cvFavMeal;
         public viewHolder(@NonNull View v) {
             super(v);
             ivFavMeal=v.findViewById(R.id.ivDailyInspiration);
             tvFavName=v.findViewById(R.id.tvDIName);
             btnAddToDaily=v.findViewById(R.id.btnAboutApp);
             btnDelete=v.findViewById(R.id.btnDelete);
-
+            cvFavMeal=v.findViewById(R.id.cvFavMeal);
 
         }
     }
