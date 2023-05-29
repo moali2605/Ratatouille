@@ -1,7 +1,7 @@
 package com.example.ratatouille.FavouriteMeal.view;
 
 import android.content.Context;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +54,10 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
 
             deleteInterface.onClickShowMeal(myList.get(position));
         });
+        holder.btnAddToDaily.setOnClickListener(v -> {
+
+            deleteInterface.onClickAddToDaily(myList.get(position).getIdMeal());
+        });
     }
 
     @Override
@@ -77,11 +81,11 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
         CardView cvFavMeal;
         public viewHolder(@NonNull View v) {
             super(v);
-            ivFavMeal=v.findViewById(R.id.ivDailyInspiration);
-            tvFavName=v.findViewById(R.id.tvDIName);
-            btnAddToDaily=v.findViewById(R.id.btnAboutApp);
+            ivFavMeal=v.findViewById(R.id.ivFav);
+            tvFavName=v.findViewById(R.id.tvFav);
+            btnAddToDaily=v.findViewById(R.id.btnAddToDaily);
             btnDelete=v.findViewById(R.id.btnDelete);
-            cvFavMeal=v.findViewById(R.id.cvFavMeal);
+            cvFavMeal=v.findViewById(R.id.cvFav);
 
         }
     }

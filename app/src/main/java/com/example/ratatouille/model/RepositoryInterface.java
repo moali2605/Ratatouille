@@ -24,4 +24,7 @@ public interface RepositoryInterface {
     public void deleteMeal(MealDto meal);
 
     public LiveData<List<MealDto>> getStoredMeal();
+    public void updateColumByDay(String mealId,String day);
+    public LiveData<List<MealDto>> getMealByDay(String day);
+    public void deleteDay(String mealId);
 }

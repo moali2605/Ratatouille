@@ -25,4 +25,9 @@ public class FavouritePresenter implements AllFavViewInterface {
     public void deleteFromFav(MealDto meal) {
         repo.deleteMeal(meal);
     }
+
+    @Override
+    public void addToDaily(String day,String mealId) {
+        repo.updateColumByDay(day,mealId);
+    }
 }

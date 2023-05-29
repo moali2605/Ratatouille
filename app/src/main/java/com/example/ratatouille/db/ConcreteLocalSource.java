@@ -42,4 +42,23 @@ public class ConcreteLocalSource implements LocalSource{
     public LiveData<List<MealDto>> getMeal() {
         return mealDAO.getAllMeal();
     }
+
+    @Override
+    public void updateDay(String meal, String day) {
+        new Thread(() -> {
+            mealDAO.updateColumnDay(day,meal);
+        }).start();
+    }
+
+    @Override
+    public LiveData<List<MealDto>> getMealByDay(String day) {
+        return mealDAO.getMealByDay(day);
+    }
+
+    @Override
+    public void deleteDay(String mealId) {
+        new Thread(() -> {
+            mealDAO.deleteDay(mealId);
+        }).start();
+    }
 }

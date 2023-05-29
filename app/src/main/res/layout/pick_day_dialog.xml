@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btnSaturday"
+                android:id="@+id/btnSaturdayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -43,70 +43,70 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <Button
-                android:id="@+id/btnSunday"
+                android:id="@+id/btnSundayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/sunday"
-                app:layout_constraintEnd_toEndOf="@+id/btnSaturday"
-                app:layout_constraintStart_toStartOf="@+id/btnSaturday"
-                app:layout_constraintTop_toBottomOf="@id/btnSaturday" />
+                app:layout_constraintEnd_toEndOf="@+id/btnSaturdayDi"
+                app:layout_constraintStart_toStartOf="@+id/btnSaturdayDi"
+                app:layout_constraintTop_toBottomOf="@id/btnSaturdayDi" />
 
             <Button
-                android:id="@+id/btnMonday"
+                android:id="@+id/btnMondayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/monday"
-                app:layout_constraintEnd_toEndOf="@+id/btnSunday"
-                app:layout_constraintStart_toStartOf="@+id/btnSunday"
-                app:layout_constraintTop_toBottomOf="@id/btnSunday" />
+                app:layout_constraintEnd_toEndOf="@+id/btnSundayDi"
+                app:layout_constraintStart_toStartOf="@+id/btnSundayDi"
+                app:layout_constraintTop_toBottomOf="@id/btnSundayDi" />
 
             <Button
-                android:id="@+id/btnTuesday"
+                android:id="@+id/btnTuesdayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/tuesday"
-                app:layout_constraintEnd_toEndOf="@+id/btnMonday"
-                app:layout_constraintStart_toStartOf="@+id/btnMonday"
-                app:layout_constraintTop_toBottomOf="@id/btnMonday" />
+                app:layout_constraintEnd_toEndOf="@+id/btnMondayDi"
+                app:layout_constraintStart_toStartOf="@+id/btnMondayDi"
+                app:layout_constraintTop_toBottomOf="@id/btnMondayDi" />
 
             <Button
-                android:id="@+id/btnWednesday"
+                android:id="@+id/btnWednesdayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/wednesday"
-                app:layout_constraintEnd_toEndOf="@+id/btnTuesday"
-                app:layout_constraintStart_toStartOf="@+id/btnTuesday"
-                app:layout_constraintTop_toBottomOf="@id/btnTuesday" />
+                app:layout_constraintEnd_toEndOf="@+id/btnTuesdayDi"
+                app:layout_constraintStart_toStartOf="@+id/btnTuesdayDi"
+                app:layout_constraintTop_toBottomOf="@id/btnTuesdayDi" />
 
             <Button
-                android:id="@+id/btnThursday"
+                android:id="@+id/btnThursdayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/thursday"
-                app:layout_constraintEnd_toEndOf="@+id/btnWednesday"
-                app:layout_constraintStart_toStartOf="@+id/btnWednesday"
-                app:layout_constraintTop_toBottomOf="@id/btnWednesday" />
+                app:layout_constraintEnd_toEndOf="@+id/btnWednesdayDi"
+                app:layout_constraintStart_toStartOf="@+id/btnWednesdayDi"
+                app:layout_constraintTop_toBottomOf="@id/btnWednesdayDi" />
 
             <Button
-                android:id="@+id/btnFriday"
+                android:id="@+id/btnFridayDi"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/friday"
-                app:layout_constraintEnd_toEndOf="@+id/btnThursday"
-                app:layout_constraintStart_toStartOf="@+id/btnThursday"
-                app:layout_constraintTop_toBottomOf="@id/btnThursday" />
+                app:layout_constraintEnd_toEndOf="@+id/btnThursdayDi"
+                app:layout_constraintStart_toStartOf="@+id/btnThursdayDi"
+                app:layout_constraintTop_toBottomOf="@id/btnThursdayDi" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

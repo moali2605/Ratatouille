@@ -31,8 +31,8 @@
         android:label="fragment_daily_meal"
         tools:layout="@layout/fragment_daily_meal" >
         <action
-            android:id="@+id/action_dailyMealFragment_to_mealFragment"
-            app:destination="@id/mealFragment" />
+            android:id="@+id/action_dailyMealFragment_to_showDailyMealFragment"
+            app:destination="@id/showDailyMealFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -70,6 +70,18 @@
             app:argType="string" />
         <argument
             android:name="type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/showDailyMealFragment"
+        android:name="com.example.ratatouille.ShowDailyMeal.view.ShowDailyMealFragment"
+        android:label="fragment_show_daily_meal"
+        tools:layout="@layout/fragment_show_daily_meal" >
+        <action
+            android:id="@+id/action_showDailyMealFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+        <argument
+            android:name="Day"
             app:argType="string" />
     </fragment>
 </navigation>

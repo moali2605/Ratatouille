@@ -6,105 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".DailyMeal.DailyMealFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="0dp">
+    <Button
+        android:id="@+id/btnSaturdayDi"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/sunday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:orientation="vertical">
+    <Button
+        android:id="@+id/btnSundayDi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#8B6AD56A"
+        android:text="@string/sunday"
+        app:layout_constraintEnd_toEndOf="@+id/btnSaturdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnSaturdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaturdayDi" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/saturday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
+    <Button
+        android:id="@+id/btnMondayDi"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/monday"
+        app:layout_constraintEnd_toEndOf="@+id/btnSundayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnSundayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnSundayDi" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/sunday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/monday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/tuesday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/wednesday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/thursday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/friday"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:listitem="@layout/list_item"/>
+    <Button
+        android:id="@+id/btnTuesdayDi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#8B6AD56A"
+        android:text="@string/tuesday"
+        app:layout_constraintEnd_toEndOf="@+id/btnWednesdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnWednesdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnWednesdayDi" />
+
+    <Button
+        android:id="@+id/btnWednesdayDi"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/wednesday"
+        app:layout_constraintEnd_toEndOf="@+id/btnThursdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnThursdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnThursdayDi" />
+
+    <Button
+        android:id="@+id/btnThursdayDi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#8B6AD56A"
+        android:text="@string/thursday"
+        app:layout_constraintEnd_toEndOf="@+id/btnMondayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnMondayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnMondayDi" />
+
+    <Button
+        android:id="@+id/btnFridayDi"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/friday"
+        app:layout_constraintEnd_toEndOf="@+id/btnTuesdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnTuesdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnTuesdayDi" />
 
 
-        </LinearLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

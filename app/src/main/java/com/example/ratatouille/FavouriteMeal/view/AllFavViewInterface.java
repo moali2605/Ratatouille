@@ -9,4 +9,5 @@ import java.util.List;
 public interface AllFavViewInterface {
     public LiveData<List<MealDto>> getFavMeals();
     public void deleteFromFav(MealDto meal);
+    public void addToDaily(String day,String mealID);
 }

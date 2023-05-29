@@ -86,4 +86,19 @@ public class Repository implements RepositoryInterface {
     public LiveData<List<MealDto>> getStoredMeal() {
         return localSource.getMeal();
     }
+
+    @Override
+    public void updateColumByDay(String mealId, String day) {
+        localSource.updateDay(mealId,day);
+    }
+
+    @Override
+    public LiveData<List<MealDto>> getMealByDay(String day) {
+        return localSource.getMealByDay(day);
+    }
+
+    @Override
+    public void deleteDay(String mealId) {
+        localSource.deleteDay(mealId);
+    }
 }
