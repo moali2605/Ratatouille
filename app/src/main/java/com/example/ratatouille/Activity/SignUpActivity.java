@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -42,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                mAuth.getCurrentUser().updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(tfName.getText().toString()).build());
                                 Toast.makeText(SignUpActivity.this, "Authentication Done.",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
