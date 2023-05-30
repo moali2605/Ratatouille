@@ -5,6 +5,7 @@ import com.example.ratatouille.Ingredient.view.ViewListOfMealInterface;
 import com.example.ratatouille.Network.NetworkDelegate;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ListOfMealPresenter implements NetworkDelegate, ListOfMealViewInterface {
     private Repository repo;
@@ -40,6 +41,7 @@ public class ListOfMealPresenter implements NetworkDelegate, ListOfMealViewInter
 
     @Override
     public void addToFav(MealDto meal) {
-        repo.insertMeal(meal);
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+            repo.insertMeal(meal);
     }
 }

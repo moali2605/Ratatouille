@@ -27,7 +27,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class SignActivity extends AppCompatActivity {
 
-    Button btnSignEmail,btnLogIn,btnSignUpWithGoogle;
+    Button btnSignEmail,btnLogIn,btnSignUpWithGoogle,btnLogInAsGuest;
 
 
     String TAG="Sign";
@@ -43,6 +43,7 @@ public class SignActivity extends AppCompatActivity {
         btnSignUpWithGoogle=findViewById(R.id.btnSignWithGoogle);
         btnSignEmail=findViewById(R.id.btnSign);
         btnLogIn=findViewById(R.id.btnLogin);
+        btnLogInAsGuest=findViewById(R.id.btnLoginAsGuest);
         btnSignEmail.setOnClickListener(v -> {
             Intent intent = new Intent(SignActivity.this, SignUpActivity.class);
             startActivity(intent);
@@ -55,6 +56,10 @@ public class SignActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        btnLogInAsGuest.setOnClickListener(v -> {
+            Intent intent = new Intent(SignActivity.this, HomeActivity.class);
+            startActivity(intent);
+        });
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
         btnSignUpWithGoogle.setOnClickListener(v -> {

@@ -27,14 +27,26 @@ import com.example.ratatouille.db.ConcreteLocalSource;
 import com.example.ratatouille.home.presenter.HomePresenter;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
+import com.example.ratatouille.model.UserDto;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 //import home.view.HomeFragmentDirections;
 
 
-public class HomeFragment extends Fragment implements ViewInterface,InsertInterface {
-
+public class HomeFragment extends Fragment implements ViewInterface, InsertInterface {
+    FirebaseFirestore db;
     HomePresenter homePresenter;
     TextView tvDIName;
     ImageView ivDailyInspiration;
@@ -45,6 +57,9 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
     CategoriesAdapter categoriesAdapter;
     CountryAdapter countryAdapter;
     CardView cvDailyInspiration;
+    FirebaseUser currentUser;
+    UserDto userDto;
+    Boolean isExist;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -87,15 +102,18 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
         tvDIName = v.findViewById(R.id.tvDIName);
         ivDailyInspiration = v.findViewById(R.id.ivDailyInspiration);
         btnFavDI = v.findViewById(R.id.btnFavDI);
-        cvDailyInspiration=v.findViewById(R.id.cvDailyInspiration);
+        cvDailyInspiration = v.findViewById(R.id.cvDailyInspiration);
         homePresenter = new HomePresenter(this, Repository.getInstance(MealClient.getInstance(), ConcreteLocalSource.getInstance(getContext()), getContext()));
-
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        isExist = false;
+        checkDataInFireStore();
         //recyclerViewIngredient
         recyclerViewIngredient = v.findViewById(R.id.rvMbyIngredient);
         LinearLayoutManager linearLayoutManagerIngredient = new LinearLayoutManager(getContext());
         linearLayoutManagerIngredient.setOrientation(recyclerViewIngredient.HORIZONTAL);
         recyclerViewIngredient.setLayoutManager(linearLayoutManagerIngredient);
-        ingredientAdapter = new IngredientAdapter(getContext(),this);
+        ingredientAdapter = new IngredientAdapter(getContext(), this);
         recyclerViewIngredient.setAdapter(ingredientAdapter);
 
         //recyclerViewCategories
@@ -103,7 +121,7 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
         LinearLayoutManager linearLayoutManagerCategories = new LinearLayoutManager(getContext());
         linearLayoutManagerCategories.setOrientation(recyclerViewCategories.HORIZONTAL);
         recyclerViewCategories.setLayoutManager(linearLayoutManagerCategories);
-        categoriesAdapter = new CategoriesAdapter(getContext(),this);
+        categoriesAdapter = new CategoriesAdapter(getContext(), this);
         recyclerViewCategories.setAdapter(categoriesAdapter);
 
         //recyclerViewCountry
@@ -111,14 +129,67 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
         LinearLayoutManager linearLayoutManagerCountry = new LinearLayoutManager(getContext());
         linearLayoutManagerCountry.setOrientation(recyclerViewCountry.HORIZONTAL);
         recyclerViewCountry.setLayoutManager(linearLayoutManagerCountry);
-        countryAdapter = new CountryAdapter(getContext(),this);
+        countryAdapter = new CountryAdapter(getContext(), this);
         recyclerViewCountry.setAdapter(countryAdapter);
+
 
         //call
         homePresenter.getRandomMeal();
         homePresenter.getIngredient();
         homePresenter.getCategories();
         homePresenter.getCountry();
+
+
+    }
+
+    private void checkDataInFireStore() {
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getId().equals(currentUser.getUid())) {
+                                    //her you need to contain data from FireStore to your object
+                                    Map<String, Object> data = document.getData();
+                                    Log.i(TAG, "onComplete: "+document.getData());
+                                    userDto = new UserDto((Map<String, Object>) data.get("users"));
+                                    if (userDto.getFavMeal() != null)
+                                        homePresenter.insertAllMeal(userDto.getFavMeal());
+                                    isExist = true;
+                                }
+                            }
+                            if (!isExist) {
+                                createNewUserInFireStore();
+                            }
+                        } else {
+                            Log.d("hey", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void createNewUserInFireStore() {
+        Map<String, Object> user = new HashMap<>();
+        UserDto newUser = new UserDto(currentUser.getEmail());
+        user.put("users", newUser);
+
+        db.collection("users")
+                .document(currentUser.getUid())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("hey", "new User Added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("hey", "Error adding document", e);
+                    }
+                });
     }
 
     @Override
@@ -130,10 +201,11 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(ivDailyInspiration);
         btnFavDI.setOnClickListener(v1 -> {
-            homePresenter.addToFav(meal[0]);
+            if (FirebaseAuth.getInstance().getCurrentUser() != null)
+                homePresenter.addToFav(meal[0]);
         });
         cvDailyInspiration.setOnClickListener(v -> {
-            HomeFragmentDirections.ActionHomeFragmentToMealFragment action=HomeFragmentDirections.actionHomeFragmentToMealFragment(meal[0]);
+            HomeFragmentDirections.ActionHomeFragmentToMealFragment action = HomeFragmentDirections.actionHomeFragmentToMealFragment(meal[0]);
             Navigation.findNavController(getView()).navigate(action);
         });
     }
@@ -159,19 +231,19 @@ public class HomeFragment extends Fragment implements ViewInterface,InsertInterf
 
     @Override
     public void onClickIngredient(String search) {
-        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search,"ingredient");
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action = HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search, "ingredient");
         Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void onClickCategories(String search) {
-        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search,"categories");
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action = HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search, "categories");
         Navigation.findNavController(getView()).navigate(action);
     }
 
     @Override
     public void onClickCountry(String search) {
-        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action=HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search,"country");
+        com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action = HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search, "country");
         Navigation.findNavController(getView()).navigate(action);
     }
 }

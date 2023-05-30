@@ -61,4 +61,18 @@ public class ConcreteLocalSource implements LocalSource{
             mealDAO.deleteDay(mealId);
         }).start();
     }
+
+    @Override
+    public void insertAllMeal(List<MealDto> mealDto) {
+        new Thread(() -> {
+            mealDAO.insertAllMeal(mealDto);
+        }).start();
+    }
+
+    @Override
+    public void deleteAllMeals() {
+        new Thread(() -> {
+            mealDAO.deleteAllMeals();
+        }).start();
+    }
 }

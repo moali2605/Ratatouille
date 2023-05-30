@@ -11,6 +11,8 @@ import com.example.ratatouille.home.view.ViewInterface;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
 
+import java.util.List;
+
 public class HomePresenter implements NetworkDelegate, HomeViewInterface {
     private Repository repo;
     private ViewInterface view;
@@ -59,5 +61,10 @@ public class HomePresenter implements NetworkDelegate, HomeViewInterface {
     @Override
     public void addToFav(MealDto meal) {
         repo.insertMeal(meal);
+    }
+
+    @Override
+    public void insertAllMeal(List<MealDto> meal) {
+        repo.insertAllMeal(meal);
     }
 }

@@ -4,6 +4,7 @@ import com.example.ratatouille.Network.NetworkDelegate;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
 import com.example.ratatouille.search.view.SearchInterface;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SearchPresenter implements NetworkDelegate,PresenterInterface {
     Repository repo;
@@ -31,6 +32,7 @@ public class SearchPresenter implements NetworkDelegate,PresenterInterface {
 
     @Override
     public void insetMealToFav(MealDto meal) {
-        repo.insertMeal(meal);
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+            repo.insertMeal(meal);
     }
 }

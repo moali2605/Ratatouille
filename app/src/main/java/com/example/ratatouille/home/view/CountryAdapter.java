@@ -11,11 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.veiwHolder> {
     List<MealDto> myList = new ArrayList<>();
@@ -43,10 +46,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.veiwHold
 
         holder.tvItemName.setText(myList.get(position).getStrArea());
         holder.ivItem.setImageAlpha(R.drawable.earth);
-//        Glide.with(context).load("https://www.themealdb.com/images/category/"+myList.get(position).getStrCategory()+".png")
-//                .apply(new RequestOptions().override(200, 200))
-//                .placeholder(R.drawable.profilphoto)
-//                .error(R.drawable.profilphoto).into(holder.ivItem);
+        String imageName = myList.get(position).getStrArea().toLowerCase(Locale.ROOT);
+        int resourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+        Glide.with(context).load(resourceId)
+                .apply(new RequestOptions().override(200, 200))
+                .placeholder(R.drawable.profilphoto)
+                .error(R.drawable.profilphoto).into(holder.ivItem);
         holder.ivItem.setOnClickListener(v -> {
             insertInterface.onClickCountry(myList.get(position).getStrArea());
         });

@@ -123,6 +123,9 @@ public class MealDto implements Parcelable {
         day = in.readString();
     }
 
+    public MealDto() {
+    }
+
     public static final Creator<MealDto> CREATOR = new Creator<MealDto>() {
         @Override
         public MealDto createFromParcel(Parcel in) {

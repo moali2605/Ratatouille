@@ -101,4 +101,14 @@ public class Repository implements RepositoryInterface {
     public void deleteDay(String mealId) {
         localSource.deleteDay(mealId);
     }
+
+    @Override
+    public void insertAllMeal(List<MealDto> meal) {
+        localSource.insertAllMeal(meal);
+    }
+
+    @Override
+    public void deleteAllMeals() {
+        localSource.deleteAllMeals();
+    }
 }

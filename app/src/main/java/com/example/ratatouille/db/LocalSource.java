@@ -13,4 +13,7 @@ public interface LocalSource {
     public void updateDay(String meal,String day);
     public LiveData<List<MealDto>> getMealByDay(String day);
     public void deleteDay(String mealId);
+    public void insertAllMeal(List<MealDto> mealDto);
+    public void deleteAllMeals();
+
 }

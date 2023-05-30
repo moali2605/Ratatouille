@@ -38,6 +38,8 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
         for (int i = 1; i <= 20; i++) {
             String ingredient = null;
             String measurement = null;
+
+
             try {
                 String ingredientMethodName = "getStrIngredient" + i;
                 Log.d(TAG, "Invoking method: " + ingredientMethodName);
@@ -50,9 +52,10 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
             } catch (InvocationTargetException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchMethodException e) {
-
-                Log.i("aaaaaaa", "setList: "+meal.getStrIngredient1());
+                throw new RuntimeException(e);
             }
+
+
 
             assert ingredient != null;
             if (!ingredient.equals("")) {

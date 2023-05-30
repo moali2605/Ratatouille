@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivListByMeal);
         holder.btnAddToFavItem.setOnClickListener(v -> {
-            insertInterface.onClick(myList.get(position));
+                insertInterface.onClick(myList.get(position));
         });
         holder.cvItem.setOnClickListener(v -> {
             insertInterface.onClickShowMeal(myList.get(position));
