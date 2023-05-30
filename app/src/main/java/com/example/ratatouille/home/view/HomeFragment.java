@@ -34,6 +34,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -105,9 +106,7 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
         cvDailyInspiration = v.findViewById(R.id.cvDailyInspiration);
         homePresenter = new HomePresenter(this, Repository.getInstance(MealClient.getInstance(), ConcreteLocalSource.getInstance(getContext()), getContext()));
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-        isExist = false;
-        checkDataInFireStore();
+
         //recyclerViewIngredient
         recyclerViewIngredient = v.findViewById(R.id.rvMbyIngredient);
         LinearLayoutManager linearLayoutManagerIngredient = new LinearLayoutManager(getContext());
@@ -142,56 +141,7 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
 
     }
 
-    private void checkDataInFireStore() {
-        db.collection("users")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getId().equals(currentUser.getUid())) {
-                                    //her you need to contain data from FireStore to your object
-                                    Map<String, Object> data = document.getData();
-                                    Log.i(TAG, "onComplete: "+document.getData());
-                                    userDto = new UserDto((Map<String, Object>) data.get("users"));
-                                    if (userDto.getFavMeal() != null)
-                                        homePresenter.insertAllMeal(userDto.getFavMeal());
-                                    isExist = true;
-                                }
-                            }
-                            if (!isExist) {
-                                createNewUserInFireStore();
-                            }
-                        } else {
-                            Log.d("hey", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
-
-    private void createNewUserInFireStore() {
-        Map<String, Object> user = new HashMap<>();
-        UserDto newUser = new UserDto(currentUser.getEmail());
-        user.put("users", newUser);
-
-        db.collection("users")
-                .document(currentUser.getUid())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d("hey", "new User Added");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("hey", "Error adding document", e);
-                    }
-                });
-    }
-
+    
     @Override
     public void getMeal(MealDto[] meal) {
         Log.i(TAG, "getMeal: " + meal[0].getStrMealThumb());
@@ -246,4 +196,5 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
         com.example.ratatouille.home.view.HomeFragmentDirections.ActionHomeFragmentToShowListOfMealFragment action = HomeFragmentDirections.actionHomeFragmentToShowListOfMealFragment(search, "country");
         Navigation.findNavController(getView()).navigate(action);
     }
+
 }

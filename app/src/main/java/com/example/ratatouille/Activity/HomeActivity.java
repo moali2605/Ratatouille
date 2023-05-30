@@ -1,5 +1,7 @@
 package com.example.ratatouille.Activity;
 
+import static com.example.ratatouille.home.view.HomeFragment.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -7,26 +9,107 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.ratatouille.Activity.Home.presenter.HomeActivityPresenter;
+import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
+import com.example.ratatouille.db.ConcreteLocalSource;
+import com.example.ratatouille.model.Repository;
+import com.example.ratatouille.model.UserDto;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationBar;
     NavController navController;
+    HomeActivityPresenter homeActivityPresenter;
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    UserDto userDto;
+    Boolean isExist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        homeActivityPresenter = new HomeActivityPresenter(Repository.getInstance(MealClient.getInstance(), ConcreteLocalSource.getInstance(this), this));
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        isExist = false;
+        if (currentUser != null) {
+            checkDataInFireStore();
+        }
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationBar, navController);
 
     }
+
+    private void checkDataInFireStore() {
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getId().equals(currentUser.getUid())) {
+                                    //her you need to contain data from FireStore to your object
+                                    Map<String, Object> data = document.getData();
+                                    Log.i(TAG, "onComplete: " + document.getData());
+                                    userDto = new UserDto((Map<String, Object>) data.get("users"));
+                                    if (userDto.getFavMeal() != null)
+                                        homeActivityPresenter.insertAllMeal(userDto.getFavMeal());
+                                    isExist = true;
+                                }
+                            }
+                            if (!isExist) {
+                                createNewUserInFireStore();
+                            }
+                        } else {
+                            Log.d("hey", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void createNewUserInFireStore() {
+        Map<String, Object> user = new HashMap<>();
+        UserDto newUser = new UserDto(currentUser.getEmail());
+        user.put("users", newUser);
+
+        db.collection("users")
+                .document(currentUser.getUid())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("hey", "new User Added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("hey", "Error adding document", e);
+                    }
+                });
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {

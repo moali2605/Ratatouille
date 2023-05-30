@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 mAuth.getCurrentUser().updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(tfName.getText().toString()).build());
                                 Toast.makeText(SignUpActivity.this, "Authentication Done.",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+                                Intent intent=new Intent(getApplicationContext(), HomeActivity.class);
                                 startActivity(intent);
                                 finish();
                                 //updateUI(user);

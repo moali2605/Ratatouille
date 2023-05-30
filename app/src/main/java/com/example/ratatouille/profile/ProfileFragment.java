@@ -107,9 +107,10 @@ public class ProfileFragment extends Fragment implements ProfileInterface {
             String uid = currentUser.getUid();
         }
         btnLogout.setOnClickListener(v1 -> {
+            if(currentUser!=null){
             updateUserDataInFireStore();
             profilePresenter.deleteAllMeals();
-            FirebaseAuth.getInstance().signOut();
+            FirebaseAuth.getInstance().signOut();}
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         });
