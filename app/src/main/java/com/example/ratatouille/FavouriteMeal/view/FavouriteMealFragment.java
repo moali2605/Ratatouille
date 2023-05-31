@@ -52,7 +52,7 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
 
     FavAdapter favAdapter;
     FavouritePresenter favouritePresenter;
-    Button btnSaturdayDi, btnSundayDi, btnMondayDi, btnTuesdayDi, btnWednesdayDi, btnThursdayDi, btnFridayDi,btnCheckConnection;
+    Button btnSaturdayDi, btnSundayDi, btnMondayDi, btnTuesdayDi, btnWednesdayDi, btnThursdayDi, btnFridayDi, btnCheckConnection;
     FirebaseUser currentUser;
     FirebaseFirestore db;
     List<MealDto> meals;
@@ -101,7 +101,7 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
         btnWednesdayDi = v.findViewById(R.id.btnWednesdayDi);
         btnThursdayDi = v.findViewById(R.id.btnThursdayDi);
         btnFridayDi = v.findViewById(R.id.btnFridayDi);
-        btnCheckConnection=v.findViewById(R.id.btnCheckConnection);
+        btnCheckConnection = v.findViewById(R.id.btnCheckConnection);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
@@ -115,7 +115,7 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
         favouritePresenter.getFavMeals().observe(getViewLifecycleOwner(), new Observer<List<MealDto>>() {
             @Override
             public void onChanged(List<MealDto> meal) {
-                meals=meal;
+                meals = meal;
                 favAdapter.setList((ArrayList<MealDto>) meal);
                 favAdapter.notifyDataSetChanged();
             }
@@ -204,6 +204,7 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
     }
 
     private void updateUserDataInFireStore() {
+
         UserDto updatedUser = new UserDto(currentUser.getEmail(), meals);
         Map<String, Object> data = new HashMap<>();
         data.put("users", updatedUser);
@@ -223,6 +224,7 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
                     }
                 });
     }
+
     @Override
     public void getFavMeal(LiveData<List<MealDto>> meal) {
 
@@ -231,33 +233,36 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        updateUserDataInFireStore();
+        if (currentUser != null) {
+            updateUserDataInFireStore();
+        }
     }
+
     private boolean checkConnectivity() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
         boolean isConnected = networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
         return isConnected;
     }
-    private void enableUi(){
-        if (checkConnectivity()==true){
+
+    private void enableUi() {
+        if (checkConnectivity() == true) {
 
             HomeActivity activity = (HomeActivity) getActivity();
 
             NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
             NavigationUI.setupWithNavController(activity.bottomNavigationBar, navController);
 
-                FavouriteMealFragment fragment = new FavouriteMealFragment();
-                fragment.setArguments(new Bundle());
-                navController.navigate(R.id.homeFragment);
-                Menu menu = activity.bottomNavigationBar.getMenu();
-                MenuItem menuItem = menu.findItem(R.id.homeFragment);
-                MenuItem menuItem2 = menu.findItem(R.id.searchFragment);
-                MenuItem menuItem3 = menu.findItem(R.id.profileFragment);
-                menuItem.setEnabled(true);
-                menuItem2.setEnabled(true);
-                menuItem3.setEnabled(true);
-
+            FavouriteMealFragment fragment = new FavouriteMealFragment();
+            fragment.setArguments(new Bundle());
+            navController.navigate(R.id.homeFragment);
+            Menu menu = activity.bottomNavigationBar.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.homeFragment);
+            MenuItem menuItem2 = menu.findItem(R.id.searchFragment);
+            MenuItem menuItem3 = menu.findItem(R.id.profileFragment);
+            menuItem.setEnabled(true);
+            menuItem2.setEnabled(true);
+            menuItem3.setEnabled(true);
 
 
         }

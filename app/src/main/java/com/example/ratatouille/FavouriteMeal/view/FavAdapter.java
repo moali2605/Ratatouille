@@ -50,7 +50,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivFavMeal);
         holder.btnDelete.setOnClickListener(v -> {
-            deleteInterface.onClick(meal);
+            deleteInterface.onClick(myList.get(position));
         });
         holder.cvFavMeal.setOnClickListener(v -> {
 
