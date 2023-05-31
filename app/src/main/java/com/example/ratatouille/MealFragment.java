@@ -159,36 +159,33 @@ public class MealFragment extends Fragment implements ViewMealInterface {
 
     @Override
     public void getSearchResult(MealDto[] meal) {
-
-
         mealDto = meal[0];
+        Glide.with(getContext()).load(mealDto.getStrMealThumb())
+                .apply(new RequestOptions().override(400, 250))
+                .placeholder(R.drawable.profilphoto)
+                .error(R.drawable.profilphoto).into(ivMeal);
+        tvMeal.setText(mealDto.getStrMeal());
+        tvCountry.setText(mealDto.getStrArea());
+        tvCatogry.setText(mealDto.getStrCategory());
+        tvDescription.setText(mealDto.getStrInstructions());
 
-            Glide.with(getContext()).load(mealDto.getStrMealThumb())
-                    .apply(new RequestOptions().override(400, 250))
-                    .placeholder(R.drawable.profilphoto)
-                    .error(R.drawable.profilphoto).into(ivMeal);
-            tvMeal.setText(mealDto.getStrMeal());
-            tvCountry.setText(mealDto.getStrArea());
-            tvCatogry.setText(mealDto.getStrCategory());
-            tvDescription.setText(mealDto.getStrInstructions());
-
-            if (!mealDto.getStrYoutube().isEmpty()) {
-                playerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-                    @Override
-                    public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                        String videoId = extractVideoIdFromUrl(mealDto.getStrYoutube());
-                        youTubePlayer.loadVideo(videoId, 0);
-                        youTubePlayer.pause();
-                    }
-                });
-            } else {
-                Toast.makeText(getContext(), "No Youtube Video", Toast.LENGTH_LONG).show();
-            }
-            btnAddToFavDe.setOnClickListener(v1 -> {
-                mealViewInterface.addToFav(mealDto);
+        if (!mealDto.getStrYoutube().isEmpty()) {
+            playerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                    String videoId = extractVideoIdFromUrl(mealDto.getStrYoutube());
+                    youTubePlayer.loadVideo(videoId, 0);
+                    youTubePlayer.pause();
+                }
             });
-            ingredientAdapter.setList(mealDto);
-            ingredientAdapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(getContext(), "No Youtube Video", Toast.LENGTH_LONG).show();
+        }
+        btnAddToFavDe.setOnClickListener(v1 -> {
+            mealViewInterface.addToFav(mealDto);
+        });
+        ingredientAdapter.setList(mealDto);
+        ingredientAdapter.notifyDataSetChanged();
 
 
     }

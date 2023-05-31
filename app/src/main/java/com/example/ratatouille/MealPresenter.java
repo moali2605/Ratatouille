@@ -1,11 +1,13 @@
 package com.example.ratatouille;
 
 
+import com.example.ratatouille.MealViewInterface;
 import com.example.ratatouille.Network.NetworkDelegate;
+import com.example.ratatouille.ViewMealInterface;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
 
-public class MealPresenter implements NetworkDelegate,MealViewInterface {
+public class MealPresenter implements NetworkDelegate, MealViewInterface {
     ViewMealInterface view;
     Repository repo;
     public MealPresenter(ViewMealInterface view,Repository repo) {
