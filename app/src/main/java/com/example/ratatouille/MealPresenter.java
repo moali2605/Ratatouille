@@ -1,8 +1,6 @@
-package com.example.ratatouille.Meal.presenter;
+package com.example.ratatouille;
 
 
-import com.example.ratatouille.Meal.view.MealViewInterface;
-import com.example.ratatouille.Meal.view.ViewMealInterface;
 import com.example.ratatouille.Network.NetworkDelegate;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
@@ -21,6 +19,11 @@ public class MealPresenter implements NetworkDelegate,MealViewInterface {
     public void getMealByName(String search) {
         repo.getMealByName(this,search);
 
+    }
+
+    @Override
+    public void addToFav(MealDto meal) {
+        repo.insertMeal(meal);
     }
 
     @Override

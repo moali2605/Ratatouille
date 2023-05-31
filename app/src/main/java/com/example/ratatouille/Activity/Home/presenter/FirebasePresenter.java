@@ -5,11 +5,11 @@ import com.example.ratatouille.model.Repository;
 
 import java.util.List;
 
-public class HomeActivityPresenter implements HomeActivityPresenterInterface{
+public class FirebasePresenter implements FirebasePresenterInterface {
 
     Repository repo;
 
-    public HomeActivityPresenter(Repository repo) {
+    public FirebasePresenter(Repository repo) {
         this.repo = repo;
     }
 

@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ratatouille.Activity.HomeActivity;
 import com.example.ratatouille.FavouriteMeal.view.FavAdapter;
 import com.example.ratatouille.Ingredient.view.ShowListOfMealFragmentDirections;
 import com.example.ratatouille.Network.MealClient;
@@ -39,6 +40,12 @@ public class ShowDailyMealFragment extends Fragment implements DailyMealInterfac
 
     private String mParam1;
     private String mParam2;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((HomeActivity) requireActivity()).bottomNavigationBar.setVisibility(View.GONE);
+    }
 
     public ShowDailyMealFragment() {
         // Required empty public constructor

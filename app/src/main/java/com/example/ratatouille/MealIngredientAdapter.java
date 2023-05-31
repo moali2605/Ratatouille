@@ -1,4 +1,4 @@
-package com.example.ratatouille.Meal.view;
+package com.example.ratatouille;
 
 import static android.content.ContentValues.TAG;
 
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.ratatouille.R;
 import com.example.ratatouille.model.MealDto;
 
 import java.lang.reflect.InvocationTargetException;

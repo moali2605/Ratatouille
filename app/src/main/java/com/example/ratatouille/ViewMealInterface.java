@@ -1,4 +1,4 @@
-package com.example.ratatouille.Meal.view;
+package com.example.ratatouille;
 
 import com.example.ratatouille.model.MealDto;
 

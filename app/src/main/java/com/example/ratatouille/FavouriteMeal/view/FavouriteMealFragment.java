@@ -1,6 +1,9 @@
 package com.example.ratatouille.FavouriteMeal.view;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,16 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.ratatouille.Activity.HomeActivity;
 import com.example.ratatouille.FavouriteMeal.presenter.FavouritePresenter;
 import com.example.ratatouille.FavouriteMeal.view.FavouriteMealFragmentDirections;
 import com.example.ratatouille.Network.MealClient;
@@ -25,9 +33,18 @@ import com.example.ratatouille.R;
 import com.example.ratatouille.db.ConcreteLocalSource;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
+import com.example.ratatouille.model.UserDto;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FavouriteMealFragment extends Fragment implements DeleteInterface, FavViewInterface {
 
@@ -35,11 +52,21 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
 
     FavAdapter favAdapter;
     FavouritePresenter favouritePresenter;
-    Button btnSaturdayDi, btnSundayDi, btnMondayDi, btnTuesdayDi, btnWednesdayDi, btnThursdayDi, btnFridayDi;
+    Button btnSaturdayDi, btnSundayDi, btnMondayDi, btnTuesdayDi, btnWednesdayDi, btnThursdayDi, btnFridayDi,btnCheckConnection;
+    FirebaseUser currentUser;
+    FirebaseFirestore db;
+    List<MealDto> meals;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((HomeActivity) requireActivity()).bottomNavigationBar.setVisibility(View.VISIBLE);
+
+    }
 
     public FavouriteMealFragment() {
         // Required empty public constructor
@@ -74,6 +101,9 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
         btnWednesdayDi = v.findViewById(R.id.btnWednesdayDi);
         btnThursdayDi = v.findViewById(R.id.btnThursdayDi);
         btnFridayDi = v.findViewById(R.id.btnFridayDi);
+        btnCheckConnection=v.findViewById(R.id.btnCheckConnection);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
 
         recyclerView = v.findViewById(R.id.rvFav);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -85,8 +115,15 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
         favouritePresenter.getFavMeals().observe(getViewLifecycleOwner(), new Observer<List<MealDto>>() {
             @Override
             public void onChanged(List<MealDto> meal) {
+                meals=meal;
                 favAdapter.setList((ArrayList<MealDto>) meal);
                 favAdapter.notifyDataSetChanged();
+            }
+        });
+        btnCheckConnection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enableUi();
             }
         });
     }
@@ -166,10 +203,63 @@ public class FavouriteMealFragment extends Fragment implements DeleteInterface, 
         dialog.show();
     }
 
+    private void updateUserDataInFireStore() {
+        UserDto updatedUser = new UserDto(currentUser.getEmail(), meals);
+        Map<String, Object> data = new HashMap<>();
+        data.put("users", updatedUser);
+        db.collection("users")
+                .document(currentUser.getUid())
+                .set(data, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("hey", "User updated successfully");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("hey", "Error updating user", e);
+                    }
+                });
+    }
     @Override
     public void getFavMeal(LiveData<List<MealDto>> meal) {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        updateUserDataInFireStore();
+    }
+    private boolean checkConnectivity() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+        boolean isConnected = networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        return isConnected;
+    }
+    private void enableUi(){
+        if (checkConnectivity()==true){
 
+            HomeActivity activity = (HomeActivity) getActivity();
+
+            NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+            NavigationUI.setupWithNavController(activity.bottomNavigationBar, navController);
+
+                FavouriteMealFragment fragment = new FavouriteMealFragment();
+                fragment.setArguments(new Bundle());
+                navController.navigate(R.id.homeFragment);
+                Menu menu = activity.bottomNavigationBar.getMenu();
+                MenuItem menuItem = menu.findItem(R.id.homeFragment);
+                MenuItem menuItem2 = menu.findItem(R.id.searchFragment);
+                MenuItem menuItem3 = menu.findItem(R.id.profileFragment);
+                menuItem.setEnabled(true);
+                menuItem2.setEnabled(true);
+                menuItem3.setEnabled(true);
+
+
+
+        }
+    }
 }

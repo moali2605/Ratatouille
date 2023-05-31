@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.ratatouille.Activity.HomeActivity;
 import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
 import com.example.ratatouille.db.ConcreteLocalSource;
@@ -39,6 +40,12 @@ public class SearchFragment extends Fragment implements SearchInterface,SearchIn
 
     private String mParam1;
     private String mParam2;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((HomeActivity) requireActivity()).bottomNavigationBar.setVisibility(View.VISIBLE);
+    }
 
     public SearchFragment() {
         // Required empty public constructor

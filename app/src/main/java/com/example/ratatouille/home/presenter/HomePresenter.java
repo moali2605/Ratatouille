@@ -4,6 +4,8 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import androidx.navigation.Navigation;
+
 import com.example.ratatouille.Network.NetworkDelegate;
 import com.example.ratatouille.home.view.HomeFragment;
 import com.example.ratatouille.home.view.HomeViewInterface;
@@ -37,6 +39,7 @@ public class HomePresenter implements NetworkDelegate, HomeViewInterface {
 
     @Override
     public void onFailureResult(String errorMsg) {
+
     }
     @Override
     public void getRandomMeal() {

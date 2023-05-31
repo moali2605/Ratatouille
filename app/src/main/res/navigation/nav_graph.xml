@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/mealFragment"
-        android:name="com.example.ratatouille.Meal.view.MealFragment"
+        android:name="com.example.ratatouille.MealFragment"
         android:label="fragment_meal"
         tools:layout="@layout/fragment_meal" >
         <argument

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 //import com.example.ratatouille.DailyMeal.view.DailyMealFragmentDirections;
+import com.example.ratatouille.Activity.HomeActivity;
 import com.example.ratatouille.R;
 
 
@@ -24,6 +25,12 @@ public class DailyMealFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((HomeActivity) requireActivity()).bottomNavigationBar.setVisibility(View.VISIBLE);
+    }
 
     public DailyMealFragment() {
         // Required empty public constructor

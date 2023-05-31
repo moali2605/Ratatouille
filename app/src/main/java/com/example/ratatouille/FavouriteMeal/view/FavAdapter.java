@@ -2,6 +2,8 @@ package com.example.ratatouille.FavouriteMeal.view;
 
 import android.content.Context;
 
+import android.content.Intent;
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +43,13 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+        meal=myList.get(position);
         holder.tvFavName.setText(myList.get(position).getStrMeal());
         Glide.with(context).load(myList.get(position).getStrMealThumb())
                 .apply(new RequestOptions().override(400, 250))
                 .placeholder(R.drawable.profilphoto)
                 .error(R.drawable.profilphoto).into(holder.ivFavMeal);
         holder.btnDelete.setOnClickListener(v -> {
-            meal=myList.get(position);
             deleteInterface.onClick(meal);
         });
         holder.cvFavMeal.setOnClickListener(v -> {
@@ -58,6 +60,19 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
 
             deleteInterface.onClickAddToDaily(myList.get(position).getIdMeal());
         });
+        holder.btnAddToCal.setOnClickListener(v -> {
+            addToMobileCalender();
+        });
+    }
+    private void addToMobileCalender(){
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.Events.TITLE, meal.getStrMeal())
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Enjoy a delicious " + meal.getStrMeal() + " for dinner!")
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, "Home")
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, System.currentTimeMillis() + (60 * 60 * 1000)); // End time is 1 hour after start time
+        context.startActivity(intent);
     }
 
     @Override
@@ -77,7 +92,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
 
         public ImageView ivFavMeal;
         TextView tvFavName;
-        Button btnAddToDaily,btnDelete;
+        Button btnAddToDaily,btnDelete,btnAddToCal;
         CardView cvFavMeal;
         public viewHolder(@NonNull View v) {
             super(v);
@@ -86,6 +101,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.viewHolder> {
             btnAddToDaily=v.findViewById(R.id.btnAddToDaily);
             btnDelete=v.findViewById(R.id.btnDelete);
             cvFavMeal=v.findViewById(R.id.cvFav);
+            btnAddToCal=v.findViewById(R.id.btnAddToCal);
 
         }
     }

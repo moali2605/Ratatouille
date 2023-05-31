@@ -29,6 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
+
             <ImageView
                 android:id="@+id/ivFav"
                 android:layout_width="0dp"
@@ -38,6 +41,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/image" />
+
+            <Button
+
+                android:id="@+id/btnAddToCal"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#4AFFFFFF"
+                android:elevation="25dp"
+                app:icon="@drawable/cal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvFav"

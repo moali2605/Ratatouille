@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ratatouille.Activity.HomeActivity;
 import com.example.ratatouille.Ingredient.presenter.ListOfMealPresenter;
 import com.example.ratatouille.Ingredient.view.ShowListOfMealFragmentDirections;
 import com.example.ratatouille.Network.MealClient;
@@ -36,6 +37,12 @@ public class ShowListOfMealFragment extends Fragment implements ViewListOfMealIn
 
     private String mParam1;
     private String mParam2;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((HomeActivity) requireActivity()).bottomNavigationBar.setVisibility(View.GONE);
+    }
 
     public ShowListOfMealFragment() {
         // Required empty public constructor

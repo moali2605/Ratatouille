@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.ratatouille.Activity.HomeActivity;
+import com.example.ratatouille.FavouriteMeal.view.FavouriteMealFragment;
 import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
 import com.example.ratatouille.db.ConcreteLocalSource;
@@ -28,20 +30,11 @@ import com.example.ratatouille.home.presenter.HomePresenter;
 import com.example.ratatouille.model.MealDto;
 import com.example.ratatouille.model.Repository;
 import com.example.ratatouille.model.UserDto;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 //import home.view.HomeFragmentDirections;
 
@@ -59,6 +52,7 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
     CountryAdapter countryAdapter;
     CardView cvDailyInspiration;
     FirebaseUser currentUser;
+    NavController navController;
     UserDto userDto;
     Boolean isExist;
 
@@ -66,6 +60,12 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((HomeActivity) requireActivity()).bottomNavigationBar.setVisibility(View.VISIBLE);
+    }
 
     public HomeFragment() {
         // Required empty public constructor
@@ -139,6 +139,8 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
         homePresenter.getCountry();
 
 
+
+
     }
 
     
@@ -158,6 +160,7 @@ public class HomeFragment extends Fragment implements ViewInterface, InsertInter
             HomeFragmentDirections.ActionHomeFragmentToMealFragment action = HomeFragmentDirections.actionHomeFragmentToMealFragment(meal[0]);
             Navigation.findNavController(getView()).navigate(action);
         });
+
     }
 
     @Override

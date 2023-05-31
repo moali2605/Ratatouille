@@ -1,15 +1,24 @@
 package com.example.ratatouille.Activity;
 
+import static com.example.ratatouille.home.view.HomeFragment.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ratatouille.Activity.Home.presenter.FirebasePresenter;
+import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
+import com.example.ratatouille.db.ConcreteLocalSource;
+import com.example.ratatouille.model.Repository;
+import com.example.ratatouille.model.UserDto;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import androidx.annotation.NonNull;
@@ -24,6 +33,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignActivity extends AppCompatActivity {
 
@@ -35,6 +50,8 @@ public class SignActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
     private boolean showOneTapUI = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +61,7 @@ public class SignActivity extends AppCompatActivity {
         btnSignEmail=findViewById(R.id.btnSign);
         btnLogIn=findViewById(R.id.btnLogin);
         btnLogInAsGuest=findViewById(R.id.btnLoginAsGuest);
+
         btnSignEmail.setOnClickListener(v -> {
             Intent intent = new Intent(SignActivity.this, SignUpActivity.class);
             startActivity(intent);
@@ -117,7 +135,7 @@ public class SignActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            updateUI(null);
+                            //updateUI(null);
                         }
                     }
                 });
@@ -131,8 +149,6 @@ public class SignActivity extends AppCompatActivity {
     }
     // [END signin]
 
-    private void updateUI(FirebaseUser user) {
 
-    }
 
 }

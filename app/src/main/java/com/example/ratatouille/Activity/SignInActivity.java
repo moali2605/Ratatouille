@@ -1,5 +1,7 @@
 package com.example.ratatouille.Activity;
 
+import static com.example.ratatouille.home.view.HomeFragment.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,19 +12,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ratatouille.Activity.Home.presenter.FirebasePresenter;
+import com.example.ratatouille.Network.MealClient;
 import com.example.ratatouille.R;
+import com.example.ratatouille.db.ConcreteLocalSource;
+import com.example.ratatouille.model.Repository;
+import com.example.ratatouille.model.UserDto;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -33,6 +48,8 @@ public class SignInActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private boolean showOneTapUI = true;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +59,7 @@ public class SignInActivity extends AppCompatActivity {
         etPassword=findViewById(R.id.tfPasswordSignIn);
         btnSignIn=findViewById(R.id.btnSignInAuth);
         btnLogInWithGoogle=findViewById(R.id.btnSignInAuthWithGoogle);
+
         btnSignIn.setOnClickListener(v -> {
             mAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -81,7 +99,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+
     }
     // [END on_start_check_user]
 
@@ -124,7 +142,7 @@ public class SignInActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            updateUI(null);
+
                         }
                     }
                 });
@@ -138,7 +156,5 @@ public class SignInActivity extends AppCompatActivity {
     }
     // [END signin]
 
-    private void updateUI(FirebaseUser user) {
 
-    }
 }
