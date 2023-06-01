@@ -14,7 +14,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="64dp"
-        android:text="@string/sunday"
+        android:text="@string/saturday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,9 +48,9 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#8B6AD56A"
         android:text="@string/tuesday"
-        app:layout_constraintEnd_toEndOf="@+id/btnWednesdayDi"
-        app:layout_constraintStart_toStartOf="@+id/btnWednesdayDi"
-        app:layout_constraintTop_toBottomOf="@+id/btnWednesdayDi" />
+        app:layout_constraintEnd_toEndOf="@+id/btnMondayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnMondayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnMondayDi" />
 
     <Button
         android:id="@+id/btnWednesdayDi"
@@ -59,9 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/wednesday"
-        app:layout_constraintEnd_toEndOf="@+id/btnThursdayDi"
-        app:layout_constraintStart_toStartOf="@+id/btnThursdayDi"
-        app:layout_constraintTop_toBottomOf="@+id/btnThursdayDi" />
+        app:layout_constraintEnd_toEndOf="@+id/btnTuesdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnTuesdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnTuesdayDi" />
 
     <Button
         android:id="@+id/btnThursdayDi"
@@ -70,9 +70,9 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#8B6AD56A"
         android:text="@string/thursday"
-        app:layout_constraintEnd_toEndOf="@+id/btnMondayDi"
-        app:layout_constraintStart_toStartOf="@+id/btnMondayDi"
-        app:layout_constraintTop_toBottomOf="@+id/btnMondayDi" />
+        app:layout_constraintEnd_toEndOf="@+id/btnWednesdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnWednesdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnWednesdayDi" />
 
     <Button
         android:id="@+id/btnFridayDi"
@@ -81,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/friday"
-        app:layout_constraintEnd_toEndOf="@+id/btnTuesdayDi"
-        app:layout_constraintStart_toStartOf="@+id/btnTuesdayDi"
-        app:layout_constraintTop_toBottomOf="@+id/btnTuesdayDi" />
+        app:layout_constraintEnd_toEndOf="@+id/btnThursdayDi"
+        app:layout_constraintStart_toStartOf="@+id/btnThursdayDi"
+        app:layout_constraintTop_toBottomOf="@+id/btnThursdayDi" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
