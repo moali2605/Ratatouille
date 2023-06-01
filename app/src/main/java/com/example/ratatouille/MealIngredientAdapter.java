@@ -46,6 +46,15 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
                 String measurementMethodName = "getStrMeasure" + i;
                 Log.d(TAG, "Invoking method: " + measurementMethodName);
                 measurement = (String) meal.getClass().getMethod(measurementMethodName).invoke(meal);
+                if (ingredient == null) ingredient = "";
+                if (measurement == null) measurement = "";
+                if (!ingredient.equals("")) {
+                    ingredientName.add(ingredient);
+
+                }
+                if (!measurement.equals("")) {
+                    ingredientMeasure.add(measurement);
+                }
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             } catch (InvocationTargetException e) {
@@ -54,13 +63,6 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
                 throw new RuntimeException(e);
             }
 
-
-
-            assert ingredient != null;
-            if (!ingredient.equals("")) {
-                ingredientName.add(ingredient);
-                ingredientMeasure.add(measurement);
-            }
         }
 
         notifyDataSetChanged();
